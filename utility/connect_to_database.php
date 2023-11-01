@@ -3,9 +3,9 @@ class connectToDatabase
 {
 // Connect to database
     private $dbHost = "localhost";
-    private $dbUser = "";
-    private $dbPassword = "";
-    private $dbName = "adatbazis";
+    private $dbUser = "URX5VP";
+    private $dbPassword = "jelszo";
+    private $dbName = "http://localhost/phpmyadmin/index.php?route=/database/structure&db=adatb_helyfoglalas";
     private $conn;
 
     public function __construct()
