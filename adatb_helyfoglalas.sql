@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Okt 27. 22:29
--- Kiszolgáló verziója: 10.4.27-MariaDB
--- PHP verzió: 8.2.0
+-- Létrehozás ideje: 2023. Nov 01. 12:42
+-- Kiszolgáló verziója: 10.4.28-MariaDB
+-- PHP verzió: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,18 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `adatb_helyfoglalas`
 --
-CREATE DATABASE adatb_helyfoglalas;
--- USE adatb_helyfoglalas; --folytatas
+CREATE DATABASE IF NOT EXISTS `adatb_helyfoglalas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `adatb_helyfoglalas`;
+
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `allomas`
 --
 
+DROP TABLE IF EXISTS `allomas`;
 CREATE TABLE `allomas` (
-  `allomasazonosito` varchar(128) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL PRIMARY KEY ,
-  `nev` varchar(128) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
-  `varos` varchar(32) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL
+                           `allomasazonosito` varchar(128) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
+                           `nev` varchar(128) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
+                           `varos` varchar(32) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
@@ -40,14 +42,15 @@ CREATE TABLE `allomas` (
 -- Tábla szerkezet ehhez a táblához `felhasznalo`
 --
 
+DROP TABLE IF EXISTS `felhasznalo`;
 CREATE TABLE `felhasznalo` (
-  `felhasznalonev` tinytext CHARACTER SET latin1 COLLATE utf16_hungarian_ci NOT NULL PRIMARY KEY,
-  `email` tinytext CHARACTER SET latin1 COLLATE utf16_hungarian_ci NOT NULL,
-  `jelszo` tinytext CHARACTER SET latin1 COLLATE utf16_hungarian_ci DEFAULT NULL,
-  `vezeteknev` tinytext CHARACTER SET latin1 COLLATE utf16_hungarian_ci DEFAULT NULL,
-  `keresztnev` tinytext CHARACTER SET latin1 COLLATE utf16_hungarian_ci DEFAULT NULL,
-  `szerep` tinytext CHARACTER SET latin1 COLLATE utf16_hungarian_ci DEFAULT 'Nincs szerepe'
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_hungarian_ci COMMENT='Minden felhasználónak egyedi neve van, ez regisztációkor ell';
+                               `felhasznalonev` varchar(128) NOT NULL,
+                               `email` varchar(128) NOT NULL,
+                               `jelszo` varchar(128) DEFAULT NULL,
+                               `vezeteknev` varchar(128) DEFAULT NULL,
+                               `keresztnev` varchar(128) DEFAULT NULL,
+                               `szerep` varchar(128) DEFAULT 'Nincs szerepe'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci COMMENT='Minden felhasználónak egyedi neve van, ez regisztációkor ell';
 
 -- --------------------------------------------------------
 
@@ -55,10 +58,11 @@ CREATE TABLE `felhasznalo` (
 -- Tábla szerkezet ehhez a táblához `felhasznalo_jegyei`
 --
 
+DROP TABLE IF EXISTS `felhasznalo_jegyei`;
 CREATE TABLE `felhasznalo_jegyei` (
-  `jegyazonosito` int(16) NOT NULL REFERENCES jegy(jegyazonosito),
-  `jaratazonosito` char(16) NOT NULL REFERENCES jarat(jaratazonosito),
-  `felhasznalonev` tinytext CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL REFERENCES felhasznalo(felhasznalonev)
+                                      `jegyazonosito` char(16) NOT NULL,
+                                      `jaratazonosito` char(16) NOT NULL,
+                                      `felhasznalonev` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
@@ -67,13 +71,14 @@ CREATE TABLE `felhasznalo_jegyei` (
 -- Tábla szerkezet ehhez a táblához `jarat`
 --
 
+DROP TABLE IF EXISTS `jarat`;
 CREATE TABLE `jarat` (
-  `jaratazonosito` char(16) NOT NULL PRIMARY KEY ,
-  `tipus` varchar(64) NOT NULL,
-  `induloallomas` varchar(128) NOT NULL,
-  `celallomas` varchar(128) NOT NULL,
-  `datum` date NOT NULL DEFAULT current_timestamp(),
-  `idopont` date NOT NULL DEFAULT current_timestamp()
+                         `jaratazonosito` char(16) NOT NULL,
+                         `tipus` varchar(64) NOT NULL,
+                         `induloallomas` varchar(128) NOT NULL,
+                         `celallomas` varchar(128) NOT NULL,
+                         `datum` date NOT NULL DEFAULT current_timestamp(),
+                         `idopont` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
@@ -82,10 +87,11 @@ CREATE TABLE `jarat` (
 -- Tábla szerkezet ehhez a táblához `jegy`
 --
 
+DROP TABLE IF EXISTS `jegy`;
 CREATE TABLE `jegy` (
-  `jegyazonosito` int(16) NOT NULL PRIMARY KEY,
-  `ar` int(16) NOT NULL DEFAULT 0,
-  `elerhetodarab` int(16) NOT NULL DEFAULT 0
+                        `jegyazonosito` int(16) NOT NULL,
+                        `ar` int(16) NOT NULL DEFAULT 0,
+                        `elerhetodarab` int(16) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
@@ -96,47 +102,35 @@ CREATE TABLE `jegy` (
 -- A tábla indexei `allomas`
 --
 ALTER TABLE `allomas`
-  ADD PRIMARY KEY (`allomasazonosito`);
+    ADD PRIMARY KEY (`allomasazonosito`);
 
 --
 -- A tábla indexei `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  ADD PRIMARY KEY (`felhasznalonev`(64));
+    ADD PRIMARY KEY (`felhasznalonev`);
 
 --
--- A tábla indexei `felhasznalo_jegyei`
+-- A tábla indexei `jarat`
 --
-ALTER TABLE `felhasznalo_jegyei`
-  ADD PRIMARY KEY (`jegyazonosito`);
-
---
--- A tábla indexei `jaratazonosito`
---
-ALTER TABLE `jaratazonosito`
-  ADD PRIMARY KEY (`jaratazonosito`);
+ALTER TABLE `jarat`
+    ADD PRIMARY KEY (`jaratazonosito`);
 
 --
 -- A tábla indexei `jegy`
 --
 ALTER TABLE `jegy`
-  ADD PRIMARY KEY (`jegyazonosito`);
+    ADD PRIMARY KEY (`jegyazonosito`);
 
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
 --
 
 --
--- AUTO_INCREMENT a táblához `felhasznalo_jegyei`
---
-ALTER TABLE `felhasznalo_jegyei`
-  MODIFY `jegyazonosito` int(16) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT a táblához `jegy`
 --
 ALTER TABLE `jegy`
-  MODIFY `jegyazonosito` int(16) NOT NULL AUTO_INCREMENT;
+    MODIFY `jegyazonosito` int(16) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
