@@ -69,6 +69,20 @@ CREATE TABLE `jarat`
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `jegy`
+--
+
+DROP TABLE IF EXISTS `jegy`;
+CREATE TABLE `jegy`
+(
+    `jegyazonosito` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `ar`            INT NOT NULL DEFAULT 0,
+    `elerhetodarab` INT NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `felhasznalo_jegyei`
 --
 
@@ -78,20 +92,6 @@ CREATE TABLE `felhasznalo_jegyei`
     `jegyazonosito`  char(16) NOT NULL,
     `jaratazonosito` char(16) NOT NULL,
     `felhasznalonev` tinytext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `jegy`
---
-
-DROP TABLE IF EXISTS `jegy`;
-CREATE TABLE `jegy`
-(
-    `jegyazonosito` int(16) NOT NULL,
-    `ar`            int(16) NOT NULL DEFAULT 0,
-    `elerhetodarab` int(16) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
