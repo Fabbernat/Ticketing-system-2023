@@ -43,11 +43,12 @@ CREATE TABLE `felhasznalo`
 (
     `felhasznalonev` varchar(128) NOT NULL PRIMARY KEY,
     `email`          varchar(128) NOT NULL UNIQUE,
-    `jelszo`         varchar(128) DEFAULT NULL,
+    `jelszo`         varchar(128),
     `vezeteknev`     varchar(128) DEFAULT NULL,
     `keresztnev`     varchar(128) DEFAULT NULL,
-    `szerep`         varchar(128) DEFAULT 'Nincs szerepe'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci COMMENT='Minden felhasználónak egyedi neve van, ez regisztációkor ell';
+    `szerep`         varchar(128) DEFAULT 'Nincs szerepe',
+    jegyek_darabszama    int          DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci COMMENT='Minden felhasználónak egyedi neve kell, hogy legyen ez regisztációkor ellenőrizzük';
 
 -- --------------------------------------------------------
 
@@ -58,12 +59,12 @@ CREATE TABLE `felhasznalo`
 DROP TABLE IF EXISTS `jarat`;
 CREATE TABLE `jarat`
 (
-    `jaratazonosito` INT AUTO_INCREMENT PRIMARY KEY,
+    `jaratazonosito` INT AUTO_INCREMENT,
     `tipus`          varchar(64)  NOT NULL,
     `induloallomas`  varchar(128) NOT NULL,
     `celallomas`     varchar(128) NOT NULL,
-    `datum`          date         NOT NULL DEFAULT current_timestamp(),
-    `idopont`        date         NOT NULL DEFAULT current_timestamp()
+    `datum`          DATE         NOT NULL DEFAULT current_timestamp(),
+    `idopont`        TIMESTAMP    NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
@@ -92,6 +93,7 @@ CREATE TABLE `felhasznalo_jegyei`
     `jegyazonosito`  char(16) NOT NULL,
     `jaratazonosito` char(16) NOT NULL,
     `felhasznalonev` tinytext NOT NULL
+        REFERENCES jegy(jegyazonosito) REFERENCES jarat(jaratazonosito) REFERENCES felhasznalo(felhasznalonev)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
