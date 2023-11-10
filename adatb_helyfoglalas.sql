@@ -23,15 +23,6 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `adatb_helyfoglalas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `adatb_helyfoglalas`;
 
-
-DROP TABLE IF EXISTS `allomas`;
-CREATE TABLE `allomas`
-(
-    `allomasazonosito` INT AUTO_INCREMENT PRIMARY KEY,
-    `nev`              varchar(128) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
-    `varos`            varchar(32) CHARACTER SET utf16 COLLATE utf16_hungarian_ci  NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
 -- --------------------------------------------------------
 
 --
@@ -49,6 +40,19 @@ CREATE TABLE `felhasznalo`
     `szerep`         varchar(128) DEFAULT 'Nincs szerepe',
     jegyek_darabszama    int          DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci COMMENT='Minden felhasználónak egyedi neve kell, hogy legyen ez regisztációkor ellenőrizzük';
+
+-- --------------------------------------------------------
+
+
+
+
+DROP TABLE IF EXISTS `allomas`;
+CREATE TABLE `allomas`
+(
+    `allomasazonosito` INT AUTO_INCREMENT PRIMARY KEY,
+    `nev`              varchar(128) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
+    `varos`            varchar(32) CHARACTER SET utf16 COLLATE utf16_hungarian_ci  NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
 

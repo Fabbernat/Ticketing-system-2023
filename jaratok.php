@@ -1,10 +1,10 @@
 <?php
 include_once "utility/return_to_index.html";
 include_once "utility/connect_to_database.php";
-$databaseConnection = new ConnectToDatabase();
+/*$databaseConnection = new ConnectToDatabase();
 
 // Use the getter method to retrieve data
-$conn = $databaseConnection->getConn();
+$conn = $databaseConnection->getConn();*/
 ?>
 
 <!DOCTYPE html>
