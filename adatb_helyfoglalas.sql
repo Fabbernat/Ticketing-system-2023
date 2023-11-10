@@ -46,14 +46,6 @@ CREATE TABLE `felhasznalo`
 
 
 
-DROP TABLE IF EXISTS `allomas`;
-CREATE TABLE `allomas`
-(
-    `allomasazonosito` INT AUTO_INCREMENT PRIMARY KEY,
-    `nev`              varchar(128) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
-    `varos`            varchar(32) CHARACTER SET utf16 COLLATE utf16_hungarian_ci  NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
-
 -- --------------------------------------------------------
 
 --
@@ -69,6 +61,15 @@ CREATE TABLE `jarat`
     `celallomas`     varchar(128) NOT NULL,
     `datum`          DATE         NOT NULL DEFAULT current_timestamp(),
     `idopont`        TIMESTAMP    NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+
+DROP TABLE IF EXISTS `allomas`;
+CREATE TABLE `allomas`
+(
+    `allomasazonosito` INT AUTO_INCREMENT PRIMARY KEY,
+    `nev`              varchar(128) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
+    `varos`            varchar(32) CHARACTER SET utf16 COLLATE utf16_hungarian_ci  NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
@@ -94,10 +95,11 @@ CREATE TABLE `jegy`
 DROP TABLE IF EXISTS `felhasznalo_jegyei`;
 CREATE TABLE `felhasznalo_jegyei`
 (
-    `jegyazonosito`  INT NOT NULL PRIMARY KEY,
     `jaratazonosito` INT NOT NULL,
-    `felhasznalonev` VARCHAR(128) NOT NULL
-        REFERENCES jegy(jegyazonosito) REFERENCES jarat(jaratazonosito) REFERENCES felhasznalo(felhasznalonev)
+    `felhasznalonev` VARCHAR(128) NOT NULL,
+    PRIMARY KEY (`jaratazonosito`, `felhasznalonev`),
+    FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat`(`jaratazonosito`),
+    FOREIGN KEY (`felhasznalonev`) REFERENCES `felhasznalo`(`felhasznalonev`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
