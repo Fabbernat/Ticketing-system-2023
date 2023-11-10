@@ -12,9 +12,9 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT = @@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS = @@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION = @@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
 --
@@ -32,18 +32,18 @@ USE `adatb_helyfoglalas`;
 DROP TABLE IF EXISTS `felhasznalo`;
 CREATE TABLE `felhasznalo`
 (
-    `felhasznalonev` varchar(128) NOT NULL PRIMARY KEY,
-    `email`          varchar(128) NOT NULL UNIQUE,
-    `jelszo`         varchar(128) NOT NULL,
-    `vezeteknev`     varchar(128) DEFAULT NULL,
-    `keresztnev`     varchar(128) DEFAULT NULL,
-    `szerep`         varchar(128) DEFAULT 'Nincs szerepe',
-    jegyek_darabszama    int          DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci COMMENT='Minden felhasználónak egyedi neve kell, hogy legyen ez regisztációkor ellenőrizzük';
+    `felhasznalonev`  varchar(128) NOT NULL PRIMARY KEY,
+    `email`           varchar(128) NOT NULL UNIQUE,
+    `jelszo`          varchar(128) NOT NULL,
+    `vezeteknev`      varchar(128) DEFAULT NULL,
+    `keresztnev`      varchar(128) DEFAULT NULL,
+    `szerep`          varchar(128) DEFAULT 'Nincs szerepe',
+    jegyek_darabszama int          DEFAULT 0
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_hungarian_ci COMMENT ='Minden felhasználónak egyedi neve kell, hogy legyen ez regisztációkor ellenőrizzük';
 
 -- --------------------------------------------------------
-
-
 
 
 -- --------------------------------------------------------
@@ -61,7 +61,9 @@ CREATE TABLE `jarat`
     `celallomas`     varchar(128) NOT NULL,
     `datum`          DATE         NOT NULL DEFAULT current_timestamp(),
     `idopont`        TIMESTAMP    NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_hungarian_ci;
 
 
 DROP TABLE IF EXISTS `allomas`;
@@ -70,7 +72,9 @@ CREATE TABLE `allomas`
     `allomasazonosito` INT AUTO_INCREMENT PRIMARY KEY,
     `nev`              varchar(128) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
     `varos`            varchar(32) CHARACTER SET utf16 COLLATE utf16_hungarian_ci  NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
 
@@ -81,10 +85,14 @@ CREATE TABLE `allomas`
 DROP TABLE IF EXISTS `jegy`;
 CREATE TABLE `jegy`
 (
-    `jegyazonosito` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `ar`            INT NOT NULL DEFAULT 0,
-    `elerhetodarab` INT NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+    `jaratazonosito` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `ar`             INT NOT NULL DEFAULT 0,
+    `elerhetodarab`  INT NOT NULL DEFAULT 0,
+    FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`)
+
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_hungarian_ci;
 
 -- --------------------------------------------------------
 
@@ -95,13 +103,15 @@ CREATE TABLE `jegy`
 DROP TABLE IF EXISTS `felhasznalo_jegyei`;
 CREATE TABLE `felhasznalo_jegyei`
 (
-    `jaratazonosito` INT NOT NULL,
+    `jaratazonosito` INT          NOT NULL,
     `felhasznalonev` VARCHAR(128) NOT NULL,
     PRIMARY KEY (`jaratazonosito`, `felhasznalonev`),
-    FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat`(`jaratazonosito`),
-    FOREIGN KEY (`felhasznalonev`) REFERENCES `felhasznalo`(`felhasznalonev`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+    FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`),
+    FOREIGN KEY (`felhasznalonev`) REFERENCES `felhasznalo` (`felhasznalonev`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_hungarian_ci;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
