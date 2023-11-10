@@ -103,6 +103,7 @@ CREATE TABLE `jegy`
 DROP TABLE IF EXISTS `felhasznalo_jegyei`;
 CREATE TABLE `felhasznalo_jegyei`
 (
+    `jegysorszam` INT AUTO_INCREMENT,
     `jaratazonosito` INT          NOT NULL,
     `felhasznalonev` VARCHAR(128) NOT NULL,
     PRIMARY KEY (`jaratazonosito`, `felhasznalonev`),
