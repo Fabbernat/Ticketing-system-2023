@@ -94,9 +94,9 @@ CREATE TABLE `jegy`
 DROP TABLE IF EXISTS `felhasznalo_jegyei`;
 CREATE TABLE `felhasznalo_jegyei`
 (
-    `jegyazonosito`  char(16) NOT NULL PRIMARY KEY,
-    `jaratazonosito` char(16) NOT NULL,
-    `felhasznalonev` tinytext NOT NULL
+    `jegyazonosito`  INT NOT NULL PRIMARY KEY,
+    `jaratazonosito` INT NOT NULL,
+    `felhasznalonev` VARCHAR(128) NOT NULL
         REFERENCES jegy(jegyazonosito) REFERENCES jarat(jaratazonosito) REFERENCES felhasznalo(felhasznalonev)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
