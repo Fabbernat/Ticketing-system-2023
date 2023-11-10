@@ -34,7 +34,7 @@ CREATE TABLE `felhasznalo`
 (
     `felhasznalonev` varchar(128) NOT NULL PRIMARY KEY,
     `email`          varchar(128) NOT NULL UNIQUE,
-    `jelszo`         varchar(128),
+    `jelszo`         varchar(128) NOT NULL,
     `vezeteknev`     varchar(128) DEFAULT NULL,
     `keresztnev`     varchar(128) DEFAULT NULL,
     `szerep`         varchar(128) DEFAULT 'Nincs szerepe',
