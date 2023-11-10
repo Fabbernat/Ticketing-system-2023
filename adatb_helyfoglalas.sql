@@ -63,7 +63,7 @@ CREATE TABLE `allomas`
 DROP TABLE IF EXISTS `jarat`;
 CREATE TABLE `jarat`
 (
-    `jaratazonosito` INT AUTO_INCREMENT,
+    `jaratazonosito` INT AUTO_INCREMENT PRIMARY KEY,
     `tipus`          varchar(64)  NOT NULL,
     `induloallomas`  varchar(128) NOT NULL,
     `celallomas`     varchar(128) NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE `jegy`
 DROP TABLE IF EXISTS `felhasznalo_jegyei`;
 CREATE TABLE `felhasznalo_jegyei`
 (
-    `jegyazonosito`  char(16) NOT NULL,
+    `jegyazonosito`  char(16) NOT NULL PRIMARY KEY,
     `jaratazonosito` char(16) NOT NULL,
     `felhasznalonev` tinytext NOT NULL
         REFERENCES jegy(jegyazonosito) REFERENCES jarat(jaratazonosito) REFERENCES felhasznalo(felhasznalonev)
