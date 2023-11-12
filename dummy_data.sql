@@ -55,7 +55,7 @@ CREATE TABLE `felhasznalo`
 DROP TABLE IF EXISTS `jarat`;
 CREATE TABLE `jarat`
 (
-    `jaratazonosito` INT AUTO_INCREMENT PRIMARY KEY,
+    `jaratazonosito` INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     `tipus`          varchar(64)  NOT NULL,
     `induloallomas`  varchar(128) NOT NULL,
     `celallomas`     varchar(128) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE `jarat`
 DROP TABLE IF EXISTS `allomas`;
 CREATE TABLE `allomas`
 (
-    `allomasazonosito` INT AUTO_INCREMENT PRIMARY KEY,
+    `allomasazonosito` INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     `nev`              varchar(128) CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
     `varos`            varchar(32) CHARACTER SET utf16 COLLATE utf16_hungarian_ci  NOT NULL
 ) ENGINE = InnoDB
@@ -85,7 +85,7 @@ CREATE TABLE `allomas`
 DROP TABLE IF EXISTS `jegy`;
 CREATE TABLE `jegy`
 (
-    `jaratazonosito` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `jaratazonosito` INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     `ar`             INT NOT NULL DEFAULT 0,
     `elerhetodarab`  INT NOT NULL DEFAULT 0,
     FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`)

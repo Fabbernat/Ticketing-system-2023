@@ -11,11 +11,10 @@ class connectToDatabase
 
     public function __construct()
     {
-        $this->conn = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword, $this->dbName);
+        $this->conn = mysqli_connect("localhost", "root", "") or die("Csatlakozási hiba");
+        if ( false == mysqli_select_db($this->conn, "adatb_helyfoglalas" )  ) {
 
-        // Check the connection
-        if ($this->conn->connect_error) {
-            die("Hiba a kapcsolódás során: " . $this->conn->connect_error);
+            return null;
         }
     }
 
