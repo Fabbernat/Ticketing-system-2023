@@ -1,3 +1,7 @@
+<?php
+include_once "navbar.php";
+?>
+
 <!DOCTYPE html>
 <html lang="hu">
   <head>
@@ -10,17 +14,17 @@
 
     <p>Válasszon a következő lehetőségek közül:</p>
 
-    <a href="login.php">
+    <a href="../login.php">
       <button>Bejelentkezés</button>
     </a>
 
-    <a href="register.php">
+    <a href="../register.php">
       <button>Regisztráció</button>
     </a>
 
     <p>Vagy tekintse meg a járatokat:</p>
 
-    <a href="jaratok.php">
+    <a href="../jaratok.php">
       <button>Járatok megtekintése</button>
     </a>
   </body>

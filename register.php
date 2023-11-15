@@ -1,5 +1,5 @@
 <?php
-include_once "utility/return_to_index.html";
+include_once "utility/navbar.php";
 include_once "utility/connect_to_database.php";
 ?>
 
@@ -10,8 +10,8 @@ include_once "utility/connect_to_database.php";
     <title>Regisztráció</title>
 </head>
 <body>
-<h1>Regisztráció</h1>
 <form action="register.php" method="post">
+    <h2>Regisztráció</h2>
     <label for="username">Felhasználónév:
         <input type="text" name="username" id="username" required>
     </label>

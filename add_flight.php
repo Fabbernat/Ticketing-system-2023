@@ -1,6 +1,6 @@
 <?php
 // Database connection
-include_once "utility/return_to_index.html";
+include_once "utility/navbar.php";
 include_once "utility/connect_to_database.php";
 $databaseConnection = new ConnectToDatabase();
 

@@ -1,11 +1,11 @@
 <?php
-include_once "return_to_index.html";
+include_once "navbar.php";
 class connectToDatabase
 {
 // Connect to database
     private $dbHost = "localhost";
-    private $dbUser = "URX5VP";
-    private $dbPassword = "jelszo";
+    private $dbUser = "root";
+    private $dbPassword = "";
     private $dbName = "adatb_helyfoglalas";
     private $conn;
 

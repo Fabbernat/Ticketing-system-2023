@@ -1,5 +1,5 @@
 <?php
-include_once "utility/return_to_index.html";
+include_once "utility/navbar.php";
 include_once "utility/connect_to_database.php";
 ?>
 
@@ -10,16 +10,16 @@ include_once "utility/connect_to_database.php";
         <title>Bejelentkezés</title>
     </head>
     <body>
-    <h1>Bejelentkezés</h1>
     <form action="login.php" method="post">
+        <h2>Bejelentkezés</h2>
+        <!-- Input fields for username and password -->
         <label for="username">Felhasználónév:
             <input type="text" name="username" id="username" required>
         </label>
-        <br>
         <label for="password">Jelszó:
             <input type="password" name="password" id="password" required>
         </label>
-        <br>
+        <!-- Submit button for login -->
         <input type="submit" value="Bejelentkezés">
     </form>
     </body>
