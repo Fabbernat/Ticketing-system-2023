@@ -7,7 +7,7 @@ $databaseConnection = new ConnectToDatabase();
 // Use the getter method to retrieve data
 $conn = $databaseConnection->getConn();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $flight_id = $_POST["flight_id"];
     $type = $_POST["type"];
     $departure = $_POST["departure"];

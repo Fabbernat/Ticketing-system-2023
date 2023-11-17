@@ -6,10 +6,10 @@ $databaseConnection = new ConnectToDatabase();
 // Use the getter method to retrieve data
 $conn = $databaseConnection->getConn();
 
-// Query to get the most popular flights based on sold tickets
-$sql = "SELECT jaratazonosito, COUNT(*) AS eladott_jegyek
+// Query to get the most popular flights based on helyazonosito
+$sql = "SELECT helyazonosito, COUNT(*) AS eladott_jegyek
         FROM jegy
-        GROUP BY jaratazonosito
+        GROUP BY helyazonosito
         ORDER BY eladott_jegyek DESC";
 
 $result = $conn->query($sql);

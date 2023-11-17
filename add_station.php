@@ -6,7 +6,7 @@ $databaseConnection = new ConnectToDatabase();
 // Use the getter method to retrieve data
 $conn = $databaseConnection->getConn();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $station_id = $_POST["station_id"];
     $name = $_POST["name"];
     $city = $_POST["city"];

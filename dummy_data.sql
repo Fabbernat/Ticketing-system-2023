@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `adatb_helyfoglalas`
+-- Adatbázis: `adatb`
 --
-CREATE DATABASE IF NOT EXISTS `adatb_helyfoglalas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `adatb_helyfoglalas`;
+CREATE DATABASE IF NOT EXISTS `adatb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `adatb`;
 
 -- --------------------------------------------------------
 
@@ -86,9 +86,10 @@ DROP TABLE IF EXISTS `jegy`;
 CREATE TABLE `jegy`
 (
     `jaratazonosito` INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `helyazonosito` INT UNIQUE,
     `ar`             INT NOT NULL DEFAULT 0,
     `elerhetodarab`  INT NOT NULL DEFAULT 0,
-    FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`)
+    FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`) ON DELETE CASCADE
 
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
@@ -103,12 +104,12 @@ CREATE TABLE `jegy`
 DROP TABLE IF EXISTS `felhasznalo_jegyei`;
 CREATE TABLE `felhasznalo_jegyei`
 (
-    `jegysorszam` INT AUTO_INCREMENT,
+    `jegysorszam` INT,
     `jaratazonosito` INT NOT NULL,
     `felhasznalonev` VARCHAR(128) NOT NULL,
     PRIMARY KEY (`jaratazonosito`, `felhasznalonev`),
-    FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`),
-    FOREIGN KEY (`felhasznalonev`) REFERENCES `felhasznalo` (`felhasznalonev`)
+    FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`) ON DELETE CASCADE ,
+    FOREIGN KEY (`felhasznalonev`) REFERENCES `felhasznalo` (`felhasznalonev`) On DELETE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_hungarian_ci;

@@ -1,9 +1,11 @@
 <?php
 include_once "navbar.php";
+include_once "connect_to_database.php"; // Corrected include statement
 
 function Jarat_felvitele(){
-    $conn = new connectToDatabase();
-    if ( !($conn = konyvtar_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
+    $connectToDatabase = new connectToDatabase();
+    $conn = $connectToDatabase->getConn();
+    if ( !($conn = adatbazis_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
         return false;
     }
     $result = mysqli_query( $conn,"SELECT * FROM felhasznalok WHERE jegyekszama = 0 GROUP BY jegyekszama ORDER BY jegyekszama DESC;");
@@ -14,7 +16,7 @@ function Jarat_felvitele(){
 
 function Allomas_felvitele(){
     $conn = new connectToDatabase();
-    if ( !($conn = konyvtar_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
+    if ( !($conn = adatbazis_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
         return false;
     }
     $result = mysqli_query( $conn,"SELECT olvasojegy, nev, szuldatum, lakcim FROM OLVASOK");
@@ -25,7 +27,7 @@ function Allomas_felvitele(){
 
 function Jegy_felvitele(){
     $conn = new connectToDatabase();
-    if ( !($conn = konyvtar_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
+    if ( !($conn = adatbazis_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
         return false;
     }
     $result = mysqli_query( $conn,"SELECT olvasojegy, nev, szuldatum, lakcim FROM OLVASOK");
@@ -81,7 +83,7 @@ function Jegy_felvitele(){
         <input type="submit" value="Állomás felvitele">
     </form>
     <h1>Jegy felvitele (admin), állomások listából</h1>
-    <form action="<?php echo Jegy_felvitele?>" method="post">
+    <form action="<?php echo Jegy_felvitele()?>" method="post">
         <label for="ticket_id">Jegy azonosító:</label>
         <input type="text" name="ticket_id" id="ticket_id" required>
         <br>

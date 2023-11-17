@@ -2,6 +2,16 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include_once "utility/navbar.php";
+global $bejelentkezve;
+$bejelentkezve = false;
+class credentials{
+    public $username;
+    public $hashed_password;
+}
+function run_SQL_query(string $SQL_query) : credentials {
+    throw new \mysql_xdevapi\Exception("UNIMPLEMENTED");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,18 +26,18 @@ include_once "utility/navbar.php";
 
     <p>Válasszon a következő lehetőségek közül:</p>
 
-    <a <?php include dirname(__FILE__).'/login.php';?>>
-      <submit>Bejelentkezés</submit>
-    </a>
-
-    <a<?php include dirname(__FILE__).'/register.php';?>>
-      <submit>Regisztráció</submit>
-    </a>
-
+    <form action="login.php" method="post">
+        <?php include_once "login.php"?>
+    </form>
+    <form action="register.php" method="post">
+     <?php include_once "register.php";?>
+    </form>
+    <form action="" method="post">
     <p>Vagy tekintse meg a járatokat:</p>
 
-    <a<?php include dirname(__FILE__).'/jaratok.php';?>>
-      <submit>Járatok megtekintése</submit>
+    <a href="jaratok.php" <?php include dirname(__FILE__).'/jaratok.php';?>>
+      <button type="submit">Járatok megtekintése</button>
     </a>
+    </form>
   </body>
 </html>

@@ -6,7 +6,7 @@ $databaseConnection = new ConnectToDatabase();
 // Use the getter method to retrieve data
 $conn = $databaseConnection->getConn();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $ticket_id = $_POST["ticket_id"];
 
     // Check if the user has the necessary privileges to delete the ticket

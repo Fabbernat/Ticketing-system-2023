@@ -7,7 +7,7 @@ $databaseConnection = new ConnectToDatabase();
 $conn = $databaseConnection->getConn();
 
 // Query to get the number of tickets by vehicle type
-$sql = "SELECT jarmutipus, COUNT(*) AS ticket_count FROM jegy GROUP BY jarmutipus";
+$sql = "SELECT tipus, COUNT(*) AS ticket_count FROM jarat GROUP BY tipus";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
     echo "<table>";
     echo "<tr><th>Járműtípus</th><th>Darabszám</th></tr>";
     while ($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["jarmutipus"] . "</td><td>" . $row["ticket_count"] . "</td></tr>";
+        echo "<tr><td>" . $row["tipus"] . "</td><td>" . $row["ticket_count"] . "</td></tr>";
     }
     echo "</table>";
 } else {

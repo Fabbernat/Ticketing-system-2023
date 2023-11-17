@@ -3,7 +3,7 @@
 function konyvtar_csatlakozas() {
 	
 	$conn = mysqli_connect("localhost", "root", "") or die("Csatlakozási hiba");
-	if ( false == mysqli_select_db($conn, "KONYVTAR" )  ) {
+	if ( false === mysqli_select_db($conn, "KONYVTAR" )  ) {
 		
 		return null;
 	}

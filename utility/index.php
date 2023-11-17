@@ -1,31 +1,3 @@
 <?php
-include_once "navbar.php";
-?>
-
-<!DOCTYPE html>
-<html lang="hu">
-  <head>
-    <meta charset="UTF-8">
-    <title>Fabian Transport</title>
-  </head>
-  <body>
-    <h1 style="text-align: center">Fabian Transport Közlekedési Társaság</h1>
-    <h2>Bejelentkezés vagy Regisztráció</h2>
-
-    <p>Válasszon a következő lehetőségek közül:</p>
-
-    <a href="../login.php">
-      <button>Bejelentkezés</button>
-    </a>
-
-    <a href="../register.php">
-      <button>Regisztráció</button>
-    </a>
-
-    <p>Vagy tekintse meg a járatokat:</p>
-
-    <a href="../jaratok.php">
-      <button>Járatok megtekintése</button>
-    </a>
-  </body>
-</html>
+include_once "navbar.php"; // Corrected include statement
+include_once "C:\XAMPP\htdocs\Adatbazis_projektmunka\index.php";

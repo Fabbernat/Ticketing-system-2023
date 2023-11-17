@@ -6,14 +6,14 @@ $databaseConnection = new ConnectToDatabase();
 // Use the getter method to retrieve data
 $conn = $databaseConnection->getConn();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $ticket_id = $_POST["ticket_id"];
     $station = $_POST["station"];
     $price = $_POST["price"];
     $available_quantity = $_POST["available_quantity"];
 
     // Insert data into the database
-    $sql = "INSERT INTO jegyek (azonosito, allomas, ar, elerheto_darab) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO jegyek (azonosito, helyazonosito, ar, elerheto_darab) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssdi", $ticket_id, $station, $price, $available_quantity);
 
