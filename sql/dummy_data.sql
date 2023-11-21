@@ -26,19 +26,18 @@ USE `adatb`;
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `felhasznalo`
+-- Tábla szerkezet ehhez a táblához `felhasznalok`
 --
 
-DROP TABLE IF EXISTS `felhasznalo`;
-CREATE TABLE `felhasznalo`
+DROP TABLE IF EXISTS felhasznalok;
+CREATE TABLE felhasznalok
 (
     `felhasznalonev`  varchar(128) NOT NULL PRIMARY KEY,
     `email`           varchar(128) NOT NULL UNIQUE,
     `jelszo`          varchar(128) NOT NULL,
     `vezeteknev`      varchar(128) DEFAULT NULL,
     `keresztnev`      varchar(128) DEFAULT NULL,
-    `szerep`          varchar(128) DEFAULT 'Nincs szerepe',
-    jegyek_darabszama int          DEFAULT 0
+    `szerep`          varchar(128) DEFAULT 'Nincs szerepe'
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_hungarian_ci COMMENT ='Minden felhasználónak egyedi neve kell, hogy legyen ez regisztációkor ellenőrizzük';
@@ -89,6 +88,7 @@ CREATE TABLE `jegy`
     `helyazonosito` INT UNIQUE,
     `ar`             INT NOT NULL DEFAULT 0,
     `elerhetodarab`  INT NOT NULL DEFAULT 0,
+    jegyek_darabszama int NOT NULL,
     FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`) ON DELETE CASCADE
 
 ) ENGINE = InnoDB
@@ -108,8 +108,8 @@ CREATE TABLE `felhasznalo_jegyei`
     `jaratazonosito` INT NOT NULL,
     `felhasznalonev` VARCHAR(128) NOT NULL,
     PRIMARY KEY (`jaratazonosito`, `felhasznalonev`),
-    FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`) ON DELETE CASCADE ,
-    FOREIGN KEY (`felhasznalonev`) REFERENCES `felhasznalo` (`felhasznalonev`) On DELETE CASCADE
+    FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`) ON DELETE RESTRICT ,
+    FOREIGN KEY (`felhasznalonev`) REFERENCES felhasznalok (`felhasznalonev`) On DELETE RESTRICT
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_hungarian_ci;
@@ -118,7 +118,7 @@ CREATE TABLE `felhasznalo_jegyei`
 /*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 
-INSERT INTO felhasznalo (felhasznalonev, email, jelszo, vezeteknev, keresztnev, szerep)
+INSERT INTO felhasznalok (felhasznalonev, email, jelszo, vezeteknev, keresztnev, szerep)
 VALUES
 ('user1', 'user1@example.com', 'password1', 'John', 'Doe', 'Felhasználó'),
 ('admin1', 'admin1@example.com', 'adminpassword', 'Admin', 'Admin', 'Adminisztrátor'),
@@ -159,7 +159,7 @@ VALUES
 ('user7', 'user7@example.com', 'password7', 'Sophia', 'Jones', 'Felhasználó'),
 ('admin7', 'admin7@example.com', 'adminpassword', 'Admin', 'Admin', 'Adminisztrátor'),
 ('szigetimonika', 'monika.szigeti@gmail.com', 'szigetipass', 'Szigeti', 'Monika', 'Felhasználó'),
-('szaboistvan', 'istvan.szabo@yahoo.com', 'szabopass', 'Szabó', 'István', 'Felhasználó'),
+('szaboistvan2', 'istvan.szabo@yahoo.com', 'szabopass', 'Szabó', 'István', 'Felhasználó'),
 ('kissandras', 'andras.kiss@gmail.com', 'kisspass', 'Kiss', 'András', 'Felhasználó'),
 ('szigetieva', 'eva.szigeti@hotmail.com', 'szigetipass', 'Szigeti', 'Éva', 'Felhasználó'),
 ('user8', 'user8@example.com', 'password8', 'Ethan', 'Johnson', 'Felhasználó'),
@@ -295,56 +295,58 @@ INSERT INTO allomas (nev, varos) VALUES
 ('Százhalombatta vasútállomás', 'Százhalombatta');
 ;
 
-INSERT INTO jegy (ar, elerhetodarab) VALUES
-(1500, 20),
-(5000, 10),
-(20000, 98),
-(30000, 12),
-(100000, 5),
-(25000, 34),
-(80000, 8),
-(35000, 14),
-(6000, 25),
-(75000, 6),
-(45000, 11),
-(9000, 22),
-(120000, 4),
-(18000, 17),
-(7000, 23),
-(55000, 9),
-(95000, 7),
-(3000, 30),
-(2490, 35),
-(85000, 5),
-(40000, 13),
-(10000, 21),
-(1990, 40),
-(50000, 10),
-(60000, 9),
-(70000, 8),
-(80000, 7),
-(99000, 63),
-(100000, 5),
-(110000, 4),
-(120000, 3),
-(130000, 3),
-(140000, 2),
-(150000, 16),
-(160000, 13),
-(170000, 2),
-(180000, 120),
-(190000, 2),
-(200000, 2),
-(250000, 16),
-(300000, 12),
-(350000, 1),
-(400000, 24),
-(450000, 1),
-(500000, 8),
-(750000, 5),
-(999999, 1);
+INSERT INTO jegy (ar, elerhetodarab, jegyek_darabszama) VALUES
+(1500, 20, 100),
+(5000, 10, 100),
+(20000, 98, 100),
+(30000, 12, 100),
+(100000, 5, 100),
+(25000, 34, 100),
+(80000, 8, 100),
+(35000, 14, 100),
+(6000, 25, 100),
+(75000, 6, 100),
+(45000, 11, 100),
+(9000, 22, 100),
+(120000, 4, 100),
+(18000, 17, 100),
+(7000, 23, 100),
+(55000, 9, 100),
+(95000, 7, 100),
+(3000, 30, 100),
+(2490, 35, 100),
+(85000, 5, 100),
+(40000, 13, 100),
+(10000, 21, 100),
+(1990, 40, 100),
+(50000, 10, 100),
+(60000, 9, 100),
+(70000, 8, 100),
+(80000, 7, 100),
+(99000, 63, 100),
+(100000, 5, 100),
+(110000, 4, 100),
+(120000, 3, 100),
+(130000, 3, 100),
+(140000, 2, 100),
+(150000, 16, 100),
+(160000, 13, 100),
+(170000, 2, 100),
+(180000, 120, 100),
+(190000, 2, 100),
+(200000, 2, 100),
+(250000, 16, 100),
+(300000, 12, 100),
+(350000, 1, 100),
+(400000, 24, 100),
+(450000, 1, 100),
+(500000, 8, 100),
+(750000, 5, 100),
+(999999, 1, 100);
 
-INSERT INTO felhasznalo_jegyei (jegysorszam, jaratazonosito, felhasznalonev) VALUES
-(1, 1, 'user1'),
-(2, 2, 'user1'),
-(3, 1, 'admin1');
+# INSERT INTO felhasznalo_jegyei (jegysorszam, jaratazonosito, felhasznalonev) VALUES
+# (1, 1, 'user1'),
+# (2, 2, 'user1'),
+# (3, 1, 'admin1');
+
+SELECT * FROM felhasznalo_jegyei WHERE jaratazonosito NOT IN (SELECT jaratazonosito FROM jegy);

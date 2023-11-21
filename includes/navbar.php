@@ -4,9 +4,7 @@
         <meta charset="UTF-8">
     </head>
     <body>
-    </body>
 
-</html>
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
@@ -17,7 +15,7 @@ function menu() {
     $menustr .= '<a href="index.php">Vissza a főoldalra</a>';
     $menustr .= '</span>';
     $menustr .= '<span style="color:blue;font-weight:bold; padding:5px;">';
-    $menustr .= '<a href="utility/admin.php">Admin</a>';
+    $menustr .= '<a href="admin.php">Admin</a>';
     $menustr .= '</span>';
     $menustr .= '<span style="color:blue;font-weight:bold; padding:5px;">';
     // $menustr .= '<a href="/Adatbazis_projektmunka/olvasok.php">Olvasók</a>';
@@ -32,3 +30,5 @@ function menu() {
 
 echo menu();
 ?>
+    </body>
+</html>

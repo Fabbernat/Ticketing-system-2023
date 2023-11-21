@@ -1,6 +1,6 @@
 <?php
-include_once "utility/navbar.php";
-include_once "utility/connect_to_database.php";
+include_once "misc/navbar.php";
+include_once "misc/connect_to_database[[maybe_deprecated]].php";
 ?>
 
 <!DOCTYPE html>
@@ -10,27 +10,7 @@ include_once "utility/connect_to_database.php";
     <title>Regisztráció</title>
 </head>
 <body>
-<form action="register.php" method="post">
-    <h2>Regisztráció</h2>
-    <label for="username">Felhasználónév:
-        <input type="text" name="username" id="username" required>
-    </label>
-    <br>
-    <label for="email">E-mail cím:
-        <input type="email" name="email" id="email" required>
-    </label>
-    <br>
-    <label for="password">Jelszó:
-        <input type="password" name="password" id="password" required>
-    </label>
-    <br>
-    <label for="confirm_password">Jelszó megerősítése:
-        <input type="password" name="confirm_password" id="confirm_password" required>
-    </label>
-    <br>
-    <!-- Submit button for registration -->
-    <button type="submit">Regisztráció</button>
-</form>
+
 </body>
 </html>
 
@@ -56,7 +36,7 @@ function register():void
             // Jelszó titkosítása (pl. használva a password_hash függvényt)
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             // Adatok beszúrása az adatbázisba
-            $sql = "INSERT INTO felhasznalo (felhasznalonev, email, jelszo, vezeteknev, keresztnev) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO felhasznalok (felhasznalonev, email, jelszo, vezeteknev, keresztnev) VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sss", $username, $email, $hashed_password);
 

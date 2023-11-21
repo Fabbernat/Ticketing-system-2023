@@ -1,7 +1,7 @@
 <?php
 // Database connection
-include_once "utility/navbar.php";
-include_once "utility/connect_to_database.php";
+include_once "misc/navbar.php";
+include_once "misc/connect_to_database[[maybe_deprecated]].php";
 $databaseConnection = new ConnectToDatabase();
 
 // Use the getter method to retrieve data

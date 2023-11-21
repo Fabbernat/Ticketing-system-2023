@@ -1,6 +1,6 @@
 <?php
 include_once "navbar.php";
-include_once "connect_to_database.php"; // Corrected include statement
+include_once "connect_to_database[[maybe_deprecated]].php"; // Corrected include statement
 
 function Jarat_felvitele(){
     $connectToDatabase = new connectToDatabase();

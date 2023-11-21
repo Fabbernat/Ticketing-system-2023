@@ -26,11 +26,11 @@ USE `adatb`;
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `felhasznalo`
+-- Tábla szerkezet ehhez a táblához `felhasznalok`
 --
 
-DROP TABLE IF EXISTS `felhasznalo`;
-CREATE TABLE `felhasznalo`
+DROP TABLE IF EXISTS `felhasznalok`;
+CREATE TABLE `felhasznalok`
 (
     `felhasznalonev`  varchar(128) NOT NULL PRIMARY KEY,
     `email`           varchar(128) NOT NULL UNIQUE,
