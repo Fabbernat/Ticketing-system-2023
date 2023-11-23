@@ -5,6 +5,8 @@ $route_id = $_GET['route_id'];
 $departure = $_GET['departure'];
 $destination = $_GET['destination'];
 
+// elokeszitjuk az utasitast
 $stmt = mysqli_prepare( $conn,"INSERT INTO jarat(tipus, induloallomas, celallomas) VALUES (?, ?, ?)");
 
-mysqli_stmt_bind_param($stmt, "ssssd", $route_id, $departure, $destination);
+// bekotjuk a parametereket (igy biztonsagosabb az adatkezeles)
+mysqli_stmt_bind_param($stmt, "iss", $route_id, $departure, $destination);

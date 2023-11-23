@@ -14,11 +14,12 @@ try {
     }
     $jelszo = password_hash($jelszo, PASSWORD_DEFAULT);
 
-    $sql = "
-INSERT INTO felhasznalok (felhasznalonev, email, jelszo, vezeteknev, keresztnev)
-VALUES
-('$felhasznalonev', '$email', '$jelszo', '$vezeteknev', '$keresztnev');";
-    $result = mysqli_query($conn, $sql);
+    // elokeszitjuk az utasitast
+    $stmt = mysqli_prepare( $conn,"INSERT INTO felhasznalok(felhasznalonev, email, jelszo, vezeteknev, keresztnev) VALUES (?, ?, ?, ?, ?)");
+
+    // bekotjuk a parametereket (igy biztonsagosabb az adatkezeles)
+    mysqli_stmt_bind_param($stmt, "sssss", $felhasznalonev, $email, $jelszo, $vezeteknev, $keresztnev );
+
 
     $GLOBALS['signup'] = "success";
     header("Location: ../index.php?signup=success");

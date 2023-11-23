@@ -1,10 +1,6 @@
 <?php
-include_once "misc/navbar.php";
-include_once "misc/connect_to_database[[maybe_deprecated]].php";
-$databaseConnection = new ConnectToDatabase();
-
-// Use the getter method to retrieve data
-$conn = $databaseConnection->getConn();
+include_once "navbar.php";
+include_once "dbh.inc.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $ticket_id = $_POST["ticket_id"];
