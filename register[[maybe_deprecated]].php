@@ -1,6 +1,6 @@
 <?php
-include_once "misc/navbar.php";
-include_once "misc/connect_to_database[[maybe_deprecated]].php";
+include_once "includes/navbar.php";
+include_once "includes/connect_to_database[[maybe_deprecated]].php";
 ?>
 
 <!DOCTYPE html>

@@ -1,14 +1,12 @@
 <?php
-include_once "navbar.php";
-include_once "connect_to_database[[maybe_deprecated]].php"; // Corrected include statement
+include_once "includes/navbar.php";
+include_once "includes/dbh.inc.php"; // Corrected include statement
 
 function Jarat_felvitele(){
-    $connectToDatabase = new connectToDatabase();
-    $conn = $connectToDatabase->getConn();
     if ( !($conn = adatbazis_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
         return false;
     }
-    $result = mysqli_query( $conn,"SELECT * FROM felhasznalok WHERE jegyekszama = 0 GROUP BY jegyekszama ORDER BY jegyekszama DESC;");
+    $result = mysqli_query( $conn,"SELECT * FROM jarat WHERE jegyekszama = 0 GROUP BY jegyekszama ORDER BY jegyekszama DESC;");
 
     mysqli_close($conn);
     return $result;
@@ -45,12 +43,14 @@ function Jegy_felvitele(){
 </head>
 <body>
     <h1>Járat felvitele (admin)</h1>
-    <form action="<?php echo Jarat_felvitele() ?>" method="post">
-        <label for="flight_id">Járat azonosító:</label>
-        <input type="text" name="flight_id" id="flight_id" required>
-        <br>
+    <form action="includes/add_route.php" method="POST">
         <label for="type">Típus:</label>
-        <input type="text" name="type" id="type" required>
+        <label for="tipus"></label>
+        <select name="tipus" id="tipus">
+            <option value="Busz">Busz</option>
+            <option value="Vonat">Vonat</option>
+            <option value="Repulo">Repulo</option>
+        </select>
         <br>
         <label for="departure">Induló állomás:</label>
         <input type="text" name="departure" id="departure" required>
@@ -58,11 +58,15 @@ function Jegy_felvitele(){
         <label for="destination">Cél állomás:</label>
         <input type="text" name="destination" id="destination" required>
         <br>
-        <label for="date">Dátum:</label>
-        <input type="date" name="date" id="date" required>
+        <label for="date">Felvétel dátuma:</label>
+        <input type="date" name="date" id="date">
         <br>
         <label for="time">Időpont:</label>
-        <input type="time" name="time" id="time" required>
+        <input type="text" name="time" id="time" value="
+         <?php
+        echo time();
+        ?>
+        ">
         <br>
         <input type="submit" value="Járat felvitele">
     </form>

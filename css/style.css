@@ -1,0 +1,30 @@
+h1,h2,h3,h4,h5,h6{
+    text-align: center;
+}
+
+h1, h2{
+    color: darkcyan;
+    font-size: xxx-large;
+}
+
+button{
+    color: darkcyan;
+    background-color: aqua;
+    font-size: xxx-large;
+    border-radius: 20px;
+}
+
+form{
+    text-align: center;
+}
+
+div{
+    background-color: lightgreen;
+    border-radius: 100px;
+    padding: 0;
+    margin: 10px;
+}
+aside{
+    vertical-align: middle;
+    horiz-align: left;
+}

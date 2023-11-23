@@ -10,19 +10,7 @@ include_once "misc/connect_to_database[[maybe_deprecated]].php";
         <title>Bejelentkezés</title>
     </head>
     <body>
-    <form action="login.php" method="post">
-        <h2>Bejelentkezés</h2>
-        <!-- Input fields for username and password -->
-        <label for="username">Felhasználónév:
-            <input type="text" name="username" id="username" required>
-        </label>
-        <label for="password">Jelszó:
-            <input type="password" name="password" id="password" required>
-        </label>
-        <!-- Submit button for login -->
-        <button type="submit">Bejelentkezés</button>
 
-    </form>
     </body>
 </html>
 
