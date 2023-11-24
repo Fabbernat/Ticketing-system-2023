@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // You can implement an access control mechanism here (e.g., check admin privileges)
 
     // Delete the ticket
-    $stmt = mysqli_prepare($conn, "DELETE FROM jegy WHERE jegyazonosito, helyazonosito = ?, ?;");
+    $stmt = mysqli_prepare($conn, "DELETE FROM jegy WHERE jaratazonosito = ?;");
     mysqli_stmt_bind_param($stmt, "s", $ticket_id);
     mysqli_stmt_execute($stmt);
     if ($stmt->execute()) {

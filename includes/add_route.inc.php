@@ -9,8 +9,8 @@ try {
     $stmt = mysqli_prepare($conn, "INSERT INTO jarat(tipus, induloallomas, celallomas, datum) VALUES (?, ?, ?, ?);");
 
 // bekotjuk a parametereket (igy biztonsagosabb az adatkezeles)
-    mysqli_stmt_bind_param($stmt, "isss", $tipus, $departure, $destination, $date);
-    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_param($stmt, "ssss", $tipus, $departure, $destination, $date);
+//    mysqli_stmt_execute($stmt); // Ez is működik
     if ($stmt->execute()) {
         echo "Járat sikeresen felvéve!";
         header("Location: admin.php?add_route=success");

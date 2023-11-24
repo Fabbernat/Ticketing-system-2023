@@ -22,7 +22,7 @@ try {
 
         // elokeszitjuk az utasitast
         $stmt = mysqli_prepare($conn, "INSERT INTO felhasznalo(felhasznalonev, email, jelszo, vezeteknev, keresztnev, szerep) VALUES (?, ?, ?, ?, ?, ?);");
-        mysqli_stmt_bind_param($stmt, "ssssss", $felhasznalonev, $email, $jelszo, $vezeteknev, $keresztnev, $szerep)
+        mysqli_stmt_bind_param($stmt, "ssssss", $felhasznalonev, $email, $jelszo, $vezeteknev, $keresztnev, $szerep);
         // bekotjuk a parametereket (igy biztonsagosabb az adatkezeles)
         if ($stmt->execute()) {
             $GLOBALS['signup'] = "success";

@@ -6,7 +6,7 @@ function Jarat_felvitele(){
     if ( !($conn = adatbazis_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
         return false;
     }
-    $result = mysqli_query( $conn,"SELECT * FROM jarat WHERE jegyekszama = 0 GROUP BY jegyekszama ORDER BY jegyekszama DESC;");
+    $result = mysqli_query( $conn,"SELECT * FROM jegy WHERE jegyek_darabszama = 0 GROUP BY jegyek_darabszama ORDER BY jegyek_darabszama DESC;");
 
     mysqli_close($conn);
     return $result;
@@ -78,11 +78,7 @@ function Jegy_felvitele(){
 
     <div>
         <h1>Állomás felvitele (admin)</h1>
-        <form action="includes/add_station.php" method="POST">
-            <label for="station_id">Állomás azonosító:
-                <input type="text" name="station_id" id="station_id" required>
-            </label>
-            <br>
+        <form action="includes/add_station.inc.php" method="POST">
             <label for="name">Név:
                 <input type="text" name="name" id="name" required>
             </label>
@@ -96,8 +92,33 @@ function Jegy_felvitele(){
     </div>
 
     <div>
-        <h1>Jegy felvitele (admin), állomások listából</h1>
         <form action="includes/add_ticket.php" method="POST">
+            <h1>Jegy felvitele (admin), állomások listából</h1>
+            <h2>Állomások, ezekből választhat induló- és célállomást:</h2>
+            <?php
+            $sql = "SELECT nev, varos FROM allomas;";
+            $result = mysqli_query($conn, $sql);
+            $resultCheck = mysqli_num_rows($result);
+
+            if ($resultCheck > 0) {
+                echo "Indulóállomás:" . "<select name='induloallomas' id='induloallomas'>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                    foreach ($row as $elem)
+                        echo "<option>" . $elem . "</option>";
+                }
+            }
+            echo "</select>";
+
+            $sql = "SELECT nev, varos FROM allomas;";
+            $result = mysqli_query($conn, $sql);
+
+                echo "Célállomás:" . "<select name='celallomas' id='celallomas'>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                    foreach ($row as $elem)
+                        echo "<option>" . $elem . "</option>";
+                }
+                echo "</select>";
+            ?>
             <label for="route_id">Járatazonosító:</label>
             <input type="text" name="route_id" id="route_id" required>
             <br>
@@ -145,17 +166,24 @@ function Jegy_felvitele(){
         </form>
     </div>
 
-    <?php
-    $sql = "SELECT * FROM jarat;";
-    $result = mysqli_query($conn, $sql);
-    $resultCheck = mysqli_num_rows($result);
+    <div>
+        <h1>Felhasználók listázása (admin által)</h1>
+        <form action="includes/list_users.inc.php" method="post">
+            <label for="username">Felhasználónév:</label>
+            <input type="text" name="username" id="username" required>
+            <br>
+            <input type="submit" value="Felhasználók listázása">
+        </form>
+    </div>
 
-    if ($resultCheck > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            foreach ($row as $elem)
-                echo $elem . "<br>";
-        }
-    }
-    ?>
+    <div>
+        <h1>Felhasználó törlése (admin által)</h1>
+        <form action="includes/delete_user.inc.php" method="post">
+            <label for="username">Felhasználónév:</label>
+            <input type="text" name="username" id="username" required>
+            <br>
+            <input type="submit" value="Felhasználó törlése">
+        </form>
+    </div>
 </body>
 </html>
