@@ -4,13 +4,15 @@ try {
     $felhasznalonev = mysqli_real_escape_string($conn, $_POST['felhasznalonev']);
     $jelszo = mysqli_real_escape_string($conn, $_POST['jelszo']);
 
-    $sql = "SELECT * FROM felhasznalok WHERE felhasznalonev = '$felhasznalonev';";
+    $sql = "SELECT * FROM felhasznalo WHERE felhasznalonev = '$felhasznalonev';";
     $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $database_jelszo = $row["jelszo"];
 
     if ($result->num_rows === 1) {
-        if (password_verify($jelszo, "$jelszo")) {
+        if (password_verify($jelszo, $database_jelszo)) {
             $GLOBALS['login'] = "success";
-            header("Location: ../index.php?login=success#login");
+            header("Location: ../index.php?login=success&role=user#login");
         } else {
             $GLOBALS['login'] = "wrong_password";
             header("Location: ../index.php?login=wrong_password#login");

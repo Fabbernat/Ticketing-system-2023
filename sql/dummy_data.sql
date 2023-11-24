@@ -26,11 +26,11 @@ USE `adatb`;
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `felhasznalok`
+-- Tábla szerkezet ehhez a táblához `felhasznalo`
 --
 
-DROP TABLE IF EXISTS felhasznalok;
-CREATE TABLE felhasznalok
+DROP TABLE IF EXISTS felhasznalo;
+CREATE TABLE felhasznalo
 (
     `felhasznalonev`  varchar(128) NOT NULL PRIMARY KEY,
     `email`           varchar(128) NOT NULL UNIQUE,
@@ -109,7 +109,7 @@ CREATE TABLE `felhasznalo_jegyei`
     `felhasznalonev` VARCHAR(128) NOT NULL,
     PRIMARY KEY (`jaratazonosito`, `felhasznalonev`),
     FOREIGN KEY (`jaratazonosito`) REFERENCES `jarat` (`jaratazonosito`) ON DELETE RESTRICT ,
-    FOREIGN KEY (`felhasznalonev`) REFERENCES felhasznalok (`felhasznalonev`) On DELETE RESTRICT
+    FOREIGN KEY (`felhasznalonev`) REFERENCES felhasznalo (`felhasznalonev`) On DELETE RESTRICT
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_hungarian_ci;
@@ -118,7 +118,7 @@ CREATE TABLE `felhasznalo_jegyei`
 /*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 
-INSERT INTO felhasznalok (felhasznalonev, email, jelszo, vezeteknev, keresztnev, szerep)
+INSERT INTO felhasznalo (felhasznalonev, email, jelszo, vezeteknev, keresztnev, szerep)
 VALUES
 ('user1', 'user1@example.com', 'password1', 'John', 'Doe', 'Felhasználó'),
 ('admin1', 'admin1@example.com', 'adminpassword', 'Admin', 'Admin', 'Adminisztrátor'),

@@ -77,7 +77,7 @@ function Jegy_felvitele(){
 
     <div>
         <h1>Állomás felvitele (admin)</h1>
-        <form action="add_flight.php" method="post">
+        <form action="includes/add_station.php" method="POST">
             <label for="station_id">Állomás azonosító:
                 <input type="text" name="station_id" id="station_id" required>
             </label>
@@ -96,47 +96,51 @@ function Jegy_felvitele(){
 
     <div>
         <h1>Jegy felvitele (admin), állomások listából</h1>
-        <form action="includes/add_ticket.php" method="post">
-            <label for="ticket_id">Jegy azonosító:</label>
-            <input type="text" name="ticket_id" id="ticket_id" required>
+        <form action="includes/add_ticket.php" method="POST">
+            <label for="route_id">Járatazonosító:</label>
+            <input type="text" name="route_id" id="route_id" required>
             <br>
-            <label for="station">Állomás kiválasztása:</label>
-            <select name="station" id="station" required>
-                <option value="station1">Állomás 1</option>
-                <option value="station2">Állomás 2</option>
-                <option value="station3">Állomás 3</option>
-            </select>
+            <label for="price">Ár:</label>
+            <input type="number" name="price" id="price" required>
             <br>
-            <label for="price">Ár (nem kötelező megadni):</label>
-            <input type="number" name="price" id="price">
+            <label for="elerhetodarab">Elérhető darab:</label>
+            <input type="number" name="elerhetodarab" id="elerhetodarab" required>
             <br>
-            <label for="available_quantity">Elérhető darab:</label>
-            <input type="number" name="available_quantity" id="available_quantity" required>
+            <label for="jegyek_darabszama">jegyek_darabszama:</label>
+            <input type="number" name="jegyek_darabszama" id="jegyek_darabszama" required>
             <br>
             <input type="submit" value="Jegy felvitele">
         </form>
+
+    <?php
+
+    if($_GET['add_ticket'] === "success"){
+        echo "Jegy sikeresen felvéve!";
+    } elseif ($_GET['add_ticket'] === "failure"){
+        echo "Hiba a jegy felvitele során";
+    }
+    echo "<br>";
+    echo "POST: ";
+    echo var_dump($_POST) . "<br>";
+    echo "GET: ";
+    echo var_dump($_GET) . "<br>";
+    foreach ($_GET as $g){
+        echo $g . "<br>";
+    }
+    ?>
     </div>
 
     <div>
     <h1>Felhasználó jegyének törlése (admin által)</h1>
         <form action="includes/delete_user_ticket.php" method="post">
-            <label for="ticket_id">Jegy azonosító:</label>
-            <input type="text" name="ticket_id" id="ticket_id" required>
+            <label for="route_id">Járatazonosító:</label>
+            <input type="number" name="route_id" id="route_id" required>
             <br>
-            <label for="station">Állomás kiválasztása:</label>
-            <select name="station" id="station" required>
-                <option value="station1">Állomás 1</option>
-                <option value="station2">Állomás 2</option>
-                <option value="station3">Állomás 3</option>
-            </select>
+            <label for="seat_id">Helyazonosító:</label>
+            <input type="number" name="seat_id" id="seat_id" required>
             <br>
-            <label for="price">Ár (nem kötelező megadni):</label>
-            <input type="number" name="price" id="price">
-            <br>
-            <label for="available_quantity">Elérhető darab:</label>
-            <input type="number" name="available_quantity" id="available_quantity" required>
-            <br>
-            <input type="submit" value="Jegy felvitele">
+
+            <input type="submit" value="Jegy törlése">
         </form>
     </div>
 </body>

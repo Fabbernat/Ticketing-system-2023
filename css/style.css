@@ -8,6 +8,7 @@ h1, h2{
 }
 
 button{
+    width: max-content;
     color: darkcyan;
     background-color: aqua;
     font-size: xxx-large;

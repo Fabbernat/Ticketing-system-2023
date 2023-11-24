@@ -60,15 +60,23 @@ $GLOBALS['signup'] = null;
                        required>
             </label>
             <br>
+            <label for="szerep">Szerep:
+                <select id="szerep" name="szerep">
+                    <option value="user" selected name="user">Felhasználó</option>
+                    <option value="admin" name="user">Admin</option>
+                </select>
+            </label>
+            <br>
             <!-- Submit button for registration -->
             <button type="submit">Regisztráció</button>
         </form>
         <?php
-        if ($GLOBALS['signup'] === "success"){
+//        var_dump($GLOBALS);
+        if ($_GET['signup'] === "success"){
             echo "Sikeres regisztráció!";
-        } elseif ($GLOBALS['signup'] === "passwords_do_not_match") {
+        } elseif ($_GET['signup'] === "passwords_do_not_match") {
             echo "Hiba történt a regisztráció során. A két jelszó nem egyezik meg!";
-        } elseif (($GLOBALS['signup'] === "failure")) {
+        } elseif (($_GET['signup'] === "failure")) {
             echo "Már regisztrált valaki ezzel a felhasználónévvel vagy jelszóval!";
         }
         ?>
@@ -89,13 +97,13 @@ $GLOBALS['signup'] = null;
         </form>
     </div>
     <?php
-    if ($GLOBALS['login'] === "success"){
+    if ($_GET['login'] === "success"){
         echo "Sikeres bejelentkezés!";
-    } elseif ($GLOBALS['login'] === "wrong_password") {
+    } elseif ($_GET['login'] === "wrong_password") {
         echo "Hibás jelszó!";
-    } elseif (($GLOBALS['login'] === "user_not_found")) {
+    } elseif (($_GET['login'] === "user_not_found")) {
         echo "Nem található felhasználó ezzel a névvel!";
-    } elseif (($GLOBALS['login'] === "failure")){
+    } elseif (($_GET['login'] === "failure")){
         echo "Hiba történt a bejelentkezés során";
     }
     ?>
@@ -205,7 +213,7 @@ $GLOBALS['signup'] = null;
         ?>
     </div>
     <?php
-    $sql = "SELECT * FROM felhasznalok;";
+    $sql = "SELECT * FROM felhasznalo;";
     $result = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($result);
 

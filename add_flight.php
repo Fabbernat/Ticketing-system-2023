@@ -1,12 +1,5 @@
 <?php
 // Database connection
-include_once "misc/navbar.php";
-include_once "misc/connect_to_database[[maybe_deprecated]].php";
-$databaseConnection = new ConnectToDatabase();
-
-// Use the getter method to retrieve data
-$conn = $databaseConnection->getConn();
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $flight_id = $_POST["flight_id"];
     $type = $_POST["type"];
@@ -16,9 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $time = $_POST["time"];
 
     // Insert data into the database
-    $sql = "INSERT INTO jaratazonosito (jaratazonosito, tipus, induloallomas, celallomas, datum, idopont) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", $flight_id, $type, $departure, $destination, $date, $time);
+    $stmt =mysqli_prepare($conn, "INSERT INTO jaratazonosito (jaratazonosito, tipus, induloallomas, celallomas, datum, idopont) VALUES (?, ?, ?, ?, ?, ?);");
+    mysqli_stmt_bind_param($stmt, "ssssss", $flight_id, $type, $departure, $destination, $date, $time);
 
     if ($stmt->execute()) {
         echo "Járat sikeresen felvéve!";

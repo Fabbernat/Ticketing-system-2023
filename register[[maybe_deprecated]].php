@@ -36,7 +36,7 @@ function register():void
             // Jelszó titkosítása (pl. használva a password_hash függvényt)
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             // Adatok beszúrása az adatbázisba
-            $sql = "INSERT INTO felhasznalok (felhasznalonev, email, jelszo, vezeteknev, keresztnev) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO felhasznalo (felhasznalonev, email, jelszo, vezeteknev, keresztnev) VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sss", $username, $email, $hashed_password);
 

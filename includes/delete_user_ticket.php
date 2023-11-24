@@ -1,5 +1,4 @@
 <?php
-include_once "navbar.php";
 include_once "dbh.inc.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -9,13 +8,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // You can implement an access control mechanism here (e.g., check admin privileges)
 
     // Delete the ticket
-    $sql = "DELETE FROM jegyek WHERE azonosito = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $ticket_id);
+    $stmt = mysqli_prepare($conn, "DELETE FROM jegy WHERE jegyazonosito, helyazonosito = ?, ?;");
+    mysqli_stmt_bind_param($stmt, "s", $ticket_id);
 
     if ($stmt->execute()) {
+        header("Location: admin.php?delete_user_ticket=success");
         echo "A jegy sikeresen törölve!";
     } else {
+        header("Location: admin.php?delete_user_ticket=failure");
         echo "Hiba a jegy törlése során: " . $stmt->error;
     }
 
@@ -24,3 +24,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 // Database connection close
 $conn->close();
+

@@ -46,7 +46,7 @@ function check_credentials() : bool
         } else {
             echo "Nem található felhasználó ezzel a névvel!";
         }
-//    $credentials = run_SQL_query("SELECT TABLE 'felhasznalok' FROM 'adatb' WHERE 'felhasznalok'(felhasznaloknev) LIKE $username");
+//    $credentials = run_SQL_query("SELECT TABLE 'felhasznalo' FROM 'adatb' WHERE 'felhasznalo'(felhasznaloknev) LIKE $username");
 //    if ($username === $credentials->username) {
 //        // Check if the provided password matches the hashed password
 //        return password_verify($password, $credentials->hashed_password);
