@@ -4,8 +4,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once "includes/navbar.php";
 include_once "includes/dbh.inc.php";
-$GLOBALS['login'] = null;
-$GLOBALS['signup'] = null;
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +118,10 @@ $GLOBALS['signup'] = null;
             <label for="vonat">Vonat</label>
             <input type="checkbox" id="repulo" name="kozlekedes" value="repulo">
             <label for="repulo">Repülő</label>
-            <button onclick="szuresKozlekedesSzerint()">Szűrés</button>
+            <button onclick="function szuresKozlekedesSzerint() {
+
+            }
+            szuresKozlekedesSzerint()">Szűrés</button>
 
             <!-- Kikapcsolás gomb -->
             <button onclick="torles()">Törlés</button>
