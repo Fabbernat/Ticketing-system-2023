@@ -26,7 +26,7 @@ if(isset($_GET['role'])) {
     echo '</span>';
 }
 
-if(isset($_GET['role']) && $_GET['role'] === "admin") {
+if(isset($_GET['role'])){
     echo '<span style="color:blue;font-weight:bold; padding:5px;">';
     echo '<a href="admin.php">Admin</a>';
     echo '</span>';

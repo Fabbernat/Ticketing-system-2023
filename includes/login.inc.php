@@ -4,7 +4,15 @@ try {
     $felhasznalonev = mysqli_real_escape_string($conn, $_POST['felhasznalonev']);
     $jelszo = mysqli_real_escape_string($conn, $_POST['jelszo']);
 
-    $sql = "SELECT * FROM felhasznalo WHERE felhasznalonev = '$felhasznalonev';";
+    $sql = "SELECT * FROM felhasznalo WHERE felhasznalonev = '$felhasznalonev';
+
+";
+    /*
+     create table if not exists felhasznalo
+(
+    felhasznalonev varchar() null
+);
+*/
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $database_jelszo = $row["jelszo"];
