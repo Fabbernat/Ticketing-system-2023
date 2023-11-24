@@ -2,6 +2,7 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+echo "<div id='navbar'>";
 include_once "includes/navbar.php";
 include_once "includes/dbh.inc.php";
 ?>
@@ -27,6 +28,9 @@ include_once "includes/dbh.inc.php";
     <a href="#routes">Járatok megtekintése</a>
         <br>
     </aside>
+    <?php
+    echo "</div>";
+    ?>
     <hr>
 
     <div class="register">

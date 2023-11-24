@@ -22,13 +22,13 @@ echo menu();
 
 if(isset($_GET['role'])) {
     echo '<span style="color:blue;font-weight:bold; padding:5px;">';
-    echo '<a href="../user.php">Jegyek darabszámának listázása járműtípus szerint</a>';
+    echo '<a href="user.php">Jegyek darabszámának listázása járműtípus szerint</a>';
     echo '</span>';
 }
 
 if(isset($_GET['role']) && $_GET['role'] === "admin") {
     echo '<span style="color:blue;font-weight:bold; padding:5px;">';
-    echo '<a href="../admin.php">Admin</a>';
+    echo '<a href="admin.php">Admin</a>';
     echo '</span>';
 }
 ?>
