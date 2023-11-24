@@ -11,11 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Insert data into the database
     $stmt =mysqli_prepare($conn, "INSERT INTO jaratazonosito (jaratazonosito, tipus, induloallomas, celallomas, datum, idopont) VALUES (?, ?, ?, ?, ?, ?);");
     mysqli_stmt_bind_param($stmt, "ssssss", $flight_id, $type, $departure, $destination, $date, $time);
-
+    mysqli_stmt_execute($stmt);
     if ($stmt->execute()) {
         echo "Járat sikeresen felvéve!";
+        header("Location: admin.php?add_route=success");
     } else {
-        echo "Hiba a járat felvitele során: " . $stmt->error;
+        echo "Hiba az állomás felvitele során: " . $stmt->error;
+        header("Location: admin.php?add_route=failure");
     }
 
     $stmt->close();

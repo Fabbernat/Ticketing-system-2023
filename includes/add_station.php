@@ -9,13 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Insert data into the database
     $stmt = mysqli_prepare($conn, "INSERT INTO allomas (allomasazonosito, nev, varos) VALUES (?, ?, ?);");
     mysqli_stmt_bind_param($stmt, "iss", $station_id, $name, $city);
-
+    mysqli_stmt_execute($stmt);
     if ($stmt->execute()) {
         echo "Állomás sikeresen felvéve!";
-        header("Location: admin.php?add_station=success");
+        header("Location: ../admin.php?add_station=success");
     } else {
         echo "Hiba az állomás felvitele során: " . $stmt->error;
-        header("Location: admin.php?add_station=failure");
+        header("Location: ../admin.php?add_station=failure");
     }
 
     $stmt->close();

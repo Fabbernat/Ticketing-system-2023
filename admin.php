@@ -46,11 +46,10 @@ function Jegy_felvitele(){
 
     <div>
         <h1>Járat felvitele (admin)</h1>
-        <form action="includes/add_route.php" method="POST">
-            <label for="type">Típus:</label>
-            <label for="tipus"></label>
+        <form action="includes/add_route.inc.php" method="POST">
+            <label for="tipus">Típus:</label>
             <select name="tipus" id="tipus">
-                <option value="Busz">Busz</option>
+                <option value="Busz" selected>Busz</option>
                 <option value="Vonat">Vonat</option>
                 <option value="Repulo">Repulo</option>
             </select>
@@ -61,17 +60,19 @@ function Jegy_felvitele(){
             <label for="destination">Cél állomás:</label>
             <input type="text" name="destination" id="destination" required>
             <br>
-            <label for="date">Felvétel dátuma:</label>
+            <label for="date">Első indulás dátuma:</label>
             <input type="date" name="date" id="date">
             <br>
-            <label for="time">Időpont:</label>
-            <input type="text" name="time" id="time" value="
-             <?php
-            echo time();
-            ?>
-            ">
             <br>
             <input type="submit" value="Járat felvitele">
+            <br>
+            <?php
+                if ($_GET['add_route'] === "success"){
+                    echo "Járat sikeresen felvéve!<br>";
+                } elseif ($_GET['add_route'] === "failure"){
+                    echo "Valami hiba történt!<br>";
+                }
+            ?>
         </form>
     </div>
 
@@ -143,5 +144,18 @@ function Jegy_felvitele(){
             <input type="submit" value="Jegy törlése">
         </form>
     </div>
+
+    <?php
+    $sql = "SELECT * FROM jarat;";
+    $result = mysqli_query($conn, $sql);
+    $resultCheck = mysqli_num_rows($result);
+
+    if ($resultCheck > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            foreach ($row as $elem)
+                echo $elem . "<br>";
+        }
+    }
+    ?>
 </body>
 </html>

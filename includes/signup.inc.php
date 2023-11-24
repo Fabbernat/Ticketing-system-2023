@@ -22,11 +22,14 @@ try {
 
         // elokeszitjuk az utasitast
         $stmt = mysqli_prepare($conn, "INSERT INTO felhasznalo(felhasznalonev, email, jelszo, vezeteknev, keresztnev, szerep) VALUES (?, ?, ?, ?, ?, ?);");
-
+        mysqli_stmt_bind_param($stmt, "ssssss", $felhasznalonev, $email, $jelszo, $vezeteknev, $keresztnev, $szerep)
         // bekotjuk a parametereket (igy biztonsagosabb az adatkezeles)
-        if (mysqli_stmt_bind_param($stmt, "ssssss", $felhasznalonev, $email, $jelszo, $vezeteknev, $keresztnev, $szerep)) {
+        if ($stmt->execute()) {
             $GLOBALS['signup'] = "success";
             header("Location: ../index.php?signup=success");
+        }  else {
+            echo "Hiba az állomás felvitele során: " . $stmt->error;
+            header("Location: ../index.php?signup=failure");
         }
     }
 } catch (exception){
