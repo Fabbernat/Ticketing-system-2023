@@ -17,7 +17,7 @@ include_once "includes/dbh.inc.php";
     <body>
     <h1 style="text-align: center; margin-top: 100px ">Jegyek darabszámának listázása járműtípus szerint</h1>
         <div class="routes">
-            <form action="admin.php" method="POST">
+            <form action="includes/list_popular_routes.inc.php" method="POST">
                 <h2 id="routes">Vagy keressen a járatok között:</h2>
 
                 <!-- Szűrés közlekedési eszköz szerint -->
@@ -52,7 +52,7 @@ include_once "includes/dbh.inc.php";
                 <label for="celallomas">Célállomás:</label>
                 <input type="text" id="celallomas" placeholder="Célállomás">
                 <br>
-                <button type="submit">Keresés állomások és járatok között</button>
+                <button type="submit">Keresés állomások és járatok között (még nincs kész)</button>
             </form>
         </div>
 
@@ -61,16 +61,16 @@ include_once "includes/dbh.inc.php";
             <form action="includes/list_tickets_by_vehicle_type.inc.php" method="POST">
                 <button type="submit">Jegyek darabszámának listázása járműtípus szerint</button>
                 <?php
-                echo $_GET['result'];
+                echo @$_GET['result'];
                 ?>
             </form>
         </div>
 
         <div>
-            <form action="includes/list_tickets_by_station.inc.php" method="POST">
+            <form action="includes/list_tickets_by_station_with_info.inc.php" method="POST">
                 <button type="submit">Jegyek darabszámának listázása állomások szerint, állomás-információval</button>
                 <?php
-                echo $_GET['result'];
+                echo @$_GET['result'];
                 ?>
             </form>
         </div>
@@ -79,7 +79,7 @@ include_once "includes/dbh.inc.php";
             <form action="includes/view_tickets.inc.php" method="POST">
                 <button type="submit">Felhasználó saját jegyeinek megtekintése</button>
                 <?php
-                echo $_GET['result'];
+                echo @$_GET['result'];
                 ?>
             </form>
         </div>
@@ -88,7 +88,7 @@ include_once "includes/dbh.inc.php";
             <form action="includes/buy_tickets.inc.php" method="POST">
                 <button type="submit">Jegyvásárlás</button>
                 <?php
-                echo $_GET['result'];
+                echo @$_GET['result'];
                 ?>
             </form>
         </div>
@@ -97,7 +97,7 @@ include_once "includes/dbh.inc.php";
             <form action="includes/list_popular_routes.inc.php" method="POST">
                 <button type="submit">Legnépszerűbb járatok adatainak felsorolása (elkelt jegyek alapján)</button>
                 <?php
-                echo $_GET['result'];
+                echo @$_GET['result'];
                 ?>
             </form>
         </div>
@@ -106,7 +106,7 @@ include_once "includes/dbh.inc.php";
             <form action="includes/delete_route.inc.php" method="POST">
                 <button type="submit">Járat törlése</button>
                 <?php
-                echo $_GET['result'];
+                echo @$_GET['result'];
                 ?>
             </form>
         </div>

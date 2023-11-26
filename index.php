@@ -7,7 +7,7 @@ if(isset($_GET['signedin']) && $_GET['signedin'] === true){
     echo '<a href="user.php">Felhasználó műveletek</a>';
     echo '</span>';
 
-    if ($admin) {
+    if (@$admin) {
         echo '<span style="color:blue;font-weight:bold; padding:5px;">';
         echo '<a href="admin.php">Admin műveletek</a>';
         echo '</span>';
@@ -55,7 +55,8 @@ include_once "includes/dbh.inc.php";
         </form>
     </div>
         <?php
-        if (isset($_GET['logout'])) {
+        $logout = @$_GET['logout'];
+        if (isset($logout)) {
             // Check the value of the 'logout' parameter
             $logoutStatus = $_GET['logout'];
             if ($logoutStatus === 'success') {
@@ -104,11 +105,12 @@ include_once "includes/dbh.inc.php";
         </form>
         <?php
 //        var_dump($GLOBALS);
-        if ($_GET['signup'] === "success"){
+            $signup = @$_GET['signup'];
+        if ($signup === "success"){
             echo "Sikeres regisztráció! Most már bejelentkezhet.";
-        } elseif ($_GET['signup'] === "passwords_do_not_match") {
+        } elseif ($signup === "passwords_do_not_match") {
             echo "Hiba történt a regisztráció során. A két jelszó nem egyezik meg!";
-        } elseif (($_GET['signup'] === "failure")) {
+        } elseif (($signup === "failure")) {
             echo "Már regisztrált valaki ezzel a felhasználónévvel vagy jelszóval!";
         }
         ?>
@@ -129,19 +131,20 @@ include_once "includes/dbh.inc.php";
         </form>
     </div>
     <?php
-    if ($_GET['login'] === "success"){
+    $value = @$_GET['login'];
+    if ($value === "success"){
         echo "Sikeres bejelentkezés!";
-    } elseif ($_GET['login'] === "wrong_password") {
+    } elseif ($value === "wrong_password") {
         echo "Hibás jelszó!";
-    } elseif (($_GET['login'] === "user_not_found")) {
+    } elseif (($value === "user_not_found")) {
         echo "Nem található felhasználó ezzel a névvel!";
-    } elseif (($_GET['login'] === "failure")){
+    } elseif (($value === "failure")){
         echo "Hiba történt a bejelentkezés során";
     }
     ?>
     </div>
 
-    <div>
+    <div id="routes">
         <form action="includes/jaratok.inc.php" method="POST">
             <button type="submit">Járatok Megtekintése</button>
         </form>
