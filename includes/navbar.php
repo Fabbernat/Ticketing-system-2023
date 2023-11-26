@@ -2,6 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+$admin = true;
+
 function menu() {
     $menustr = '<div style="color: pink; font-weight: bold; padding: 5px;" id="navbar">';
     $menustr .= '<span style="color:blue;font-weight:bold; padding:5px;">';
@@ -13,22 +15,23 @@ function menu() {
     $menustr .= '<span style="color:blue;font-weight:bold; padding:5px;">';
     // $menustr .= '<a href="/Adatbazis_projektmunka/kolcsonzesek.php">Kölcsönzések</a>';
     $menustr .= '</span>';
-    $menustr .= '</div>';
 
     return $menustr;
 }
 
 echo menu();
 
-if(isset($_GET['role'])) {
+if(session_status() === PHP_SESSION_ACTIVE) {
     echo '<span style="color:blue;font-weight:bold; padding:5px;">';
-    echo '<a href="user.php">Jegyek darabszámának listázása járműtípus szerint</a>';
+    echo '<a href="user.php">Felhasználó műveletek</a>';
     echo '</span>';
-}
 
-if(isset($_GET['role'])){
-    echo '<span style="color:blue;font-weight:bold; padding:5px;">';
-    echo '<a href="admin.php">Admin</a>';
-    echo '</span>';
+    if ($admin) {
+        echo '<span style="color:blue;font-weight:bold; padding:5px;">';
+        echo '<a href="admin.php">Admin műveletek</a>';
+        echo '</span>';
+    }
 }
+echo '</div>';
+
 ?>

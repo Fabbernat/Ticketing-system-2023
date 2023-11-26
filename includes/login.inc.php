@@ -19,6 +19,7 @@ try {
 
     if ($result->num_rows === 1) {
         if (password_verify($jelszo, $database_jelszo)) {
+            session_start();
             $GLOBALS['login'] = "success";
             header("Location: ../index.php?login=success&role=user#login");
         } else {

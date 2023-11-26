@@ -2,7 +2,9 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+echo "<div id='navbar'><div id='fixed'>";
 include_once "includes/navbar.php";
+echo "</div>";
 include_once "includes/dbh.inc.php";
 ?>
 <!DOCTYPE html>
@@ -10,6 +12,7 @@ include_once "includes/dbh.inc.php";
     <head>
         <meta charset="UTF-8">
         <title>Jegyek darabszámának listázása járműtípus szerint</title>
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <h1>Jegyek darabszámának listázása járműtípus szerint</h1>
@@ -50,6 +53,25 @@ include_once "includes/dbh.inc.php";
                 <input type="text" id="celallomas" placeholder="Célállomás">
                 <br>
                 <button type="submit">Keresés állomások és járatok között</button>
+            </form>
+        </div>
+
+
+        <div>
+            <form action="includes/list_tickets_by_vehicle_type.inc.php" method="POST">
+                <button type="submit">Jegyek darabszámának listázása járműtípus szerint</button>
+                <?php
+                echo $_GET['result'];
+                ?>
+            </form>
+        </div>
+
+        <div>
+            <form action="includes/list_tickets_by_station.inc.php" method="POST">
+                <button type="submit">Jegyek darabszámának listázása állomások szerint, állomás-információval</button>
+                <?php
+                echo $_GET['result'];
+                ?>
             </form>
         </div>
     </body>

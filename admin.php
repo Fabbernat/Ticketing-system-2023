@@ -1,39 +1,11 @@
 <?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+echo "<div id='navbar'><div id='fixed'>";
 include_once "includes/navbar.php";
-include_once "includes/dbh.inc.php"; // Corrected include statement
-
-function Jarat_felvitele(){
-    if ( !($conn = adatbazis_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
-        return false;
-    }
-    $result = mysqli_query( $conn,"SELECT * FROM jegy WHERE jegyek_darabszama = 0 GROUP BY jegyek_darabszama ORDER BY jegyek_darabszama DESC;");
-
-    mysqli_close($conn);
-    return $result;
-}
-
-function Allomas_felvitele(){
-//    $conn = new connectToDatabase();
-//    if ( !($conn = adatbazis_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
-//        return false;
-//    }
-//    $result = mysqli_query( $conn,"SELECT olvasojegy, nev, szuldatum, lakcim FROM OLVASOK");
-//
-//    mysqli_close($conn);
-//    return $result;
-}
-
-function Jegy_felvitele(){
-//    $conn = new connectToDatabase();
-//    if ( !($conn = adatbazis_csatlakozas()) ) { // ha nem sikerult csatlakozni, akkor kilepunk
-//        return false;
-//    }
-//    $result = mysqli_query( $conn,"SELECT olvasojegy, nev, szuldatum, lakcim FROM OLVASOK");
-//
-//    mysqli_close($conn);
-//    return $result;
-}
-
+echo "</div>";
+include_once "includes/dbh.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -169,9 +141,6 @@ function Jegy_felvitele(){
     <div>
         <h1>Felhasználók listázása (admin által)</h1>
         <form action="includes/list_users.inc.php" method="post">
-            <label for="username">Felhasználónév:</label>
-            <input type="text" name="username" id="username" required>
-            <br>
             <input type="submit" value="Felhasználók listázása">
         </form>
     </div>
@@ -185,5 +154,6 @@ function Jegy_felvitele(){
             <input type="submit" value="Felhasználó törlése">
         </form>
     </div>
+
 </body>
 </html>

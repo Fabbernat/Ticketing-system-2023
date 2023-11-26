@@ -1,6 +1,4 @@
 <?php
-//include_once "navbar.php"; // ez bajhoz vezethet
-//include_once "../dummy_data.sql";
 function adatbazis_csatlakozas() {
 
     $conn = mysqli_connect("localhost", "root", "", "adatb") or die("Csatlakozási hiba");

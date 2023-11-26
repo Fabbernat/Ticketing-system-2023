@@ -2,9 +2,14 @@ h1,h2,h3,h4,h5,h6{
     text-align: center;
 }
 
-h1, h2{
+h1{
     color: darkcyan;
     font-size: xxx-large;
+}
+
+h2{
+    color: darkcyan;
+    font-size: large;
 }
 
 button{
@@ -15,7 +20,7 @@ button{
     border-radius: 20px;
 }
 
-form{
+*{
     text-align: center;
 }
 
@@ -25,6 +30,14 @@ div{
     padding: 0;
     margin: 10px;
 }
+
+.muveletek{
+    background-color: blue;
+    border-radius: 100px;
+    padding: 0;
+    margin: 10px;
+}
+
 aside{
     vertical-align: middle;
     horiz-align: left;
@@ -34,6 +47,10 @@ aside{
 #navbar {
     overflow: hidden;
     background-color: #333;
+}
+
+#fixed{
+    position: fixed
 }
 
 /* Navbar links */

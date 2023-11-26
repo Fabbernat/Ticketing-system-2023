@@ -2,8 +2,9 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-echo "<div id='navbar'>";
+echo "<div id='navbar'><div id='fixed'>";
 include_once "includes/navbar.php";
+echo "</div>";
 include_once "includes/dbh.inc.php";
 ?>
 
@@ -15,12 +16,12 @@ include_once "includes/dbh.inc.php";
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-    <h1 style="text-align: center; color=black">Fabian Transport Közlekedési Társaság</h1>
+    <h1 style="text-align: center; margin-top: 100px ">Fabian Transport Közlekedési Társaság</h1>
     <img src="img/transport.jfif" alt="Fabian Transport Közlekedési Társaság borítóképe"
          title="Fabian Transport Közlekedési Társaság borítóképe">
     <hr>
     <aside>
-    <p>Válasszon a következő lehetőségek közül:</p>
+    <div><h1 style="text-align: left;">Navigáció:</h1></div>
     <a href="#signup">Regisztráció</a>
         <br>
     <a href="#login">Bejelentkezés</a>
@@ -31,8 +32,12 @@ include_once "includes/dbh.inc.php";
     <?php
     echo "</div>";
     ?>
-    <hr>
-
+    <div class="muveletek">
+    <div class="logout">
+        <form action="includes/logout.php" method="POST">
+            <button type="submit">Kijelentkezés</button>
+        </form>
+    </div>
     <div class="register">
         <form action="includes/signup.inc.php" method="POST">
             <h2 id="signup">Regisztráció</h2>
@@ -62,11 +67,8 @@ include_once "includes/dbh.inc.php";
                        required>
             </label>
             <br>
-            <label for="szerep">Szerep:
-                <select id="szerep" name="szerep">
-                    <option value="user" selected name="user">Felhasználó</option>
-                    <option value="admin" name="user">Admin</option>
-                </select>
+            <label for="radio">Admin vagyok
+                <input type="checkbox" name="radio" id="radio">
             </label>
             <br>
             <!-- Submit button for registration -->
@@ -109,6 +111,9 @@ include_once "includes/dbh.inc.php";
         echo "Hiba történt a bejelentkezés során";
     }
     ?>
+    </div>
+
+
     <div class="routes">
         <form action="includes/jaratok.inc.php" method="POST">
             <h2 id="routes">Vagy keressen a járatok között:</h2>
@@ -227,6 +232,7 @@ include_once "includes/dbh.inc.php";
             echo $row['felhasznalonev'] . "<br>";
         }
     }
+    var_dump($GLOBALS);
     ?>
     </body>
 </html>
