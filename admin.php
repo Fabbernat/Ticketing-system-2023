@@ -39,9 +39,10 @@ include_once "includes/dbh.inc.php";
             <input type="submit" value="Járat felvitele">
             <br>
             <?php
-                if ($_GET['add_route'] === "success"){
+            $add_route = @$_GET['add_route'];
+                if ($add_route === "success"){
                     echo "Járat sikeresen felvéve!<br>";
-                } elseif ($_GET['add_route'] === "failure"){
+                } elseif ($add_route === "failure"){
                     echo "Valami hiba történt!<br>";
                 }
             ?>
@@ -64,68 +65,34 @@ include_once "includes/dbh.inc.php";
     </div>
 
     <?php
-    if ($_GET['add_station'] === "success"){
+    $add_station = @$_GET['add_station'];
+    if ($add_station === "success"){
         echo "Állomás sikeresen felvéve!<br>";
-    } elseif ($_GET['add_station'] === "failure"){
+    } elseif ($add_station === "failure"){
         echo "Valami hiba történt!<br>";
     }
     ?>
 
     <div>
-        <form action="includes/add_ticket.php" method="POST">
-            <h1>Jegy felvitele (admin), állomások listából</h1>
-            <h2>Állomások, ezekből választhat induló- és célállomást:</h2>
-            <?php
-            $sql = "SELECT nev, varos FROM allomas;";
-            $result = mysqli_query($conn, $sql);
-            $resultCheck = mysqli_num_rows($result);
-
-            if ($resultCheck > 0) {
-                echo "Indulóállomás:" . "<select name='induloallomas' id='induloallomas'>";
-                while ($row = mysqli_fetch_assoc($result)) {
-                    foreach ($row as $elem)
-                        echo "<option>" . $elem . "</option>";
-                }
-            }
-            echo "</select>";
-
-            $sql = "SELECT nev, varos FROM allomas;"; // warningozza, de NEM SZABAD KITÖRÖLNI!
-            $result = mysqli_query($conn, $sql);
-
-                echo "Célállomás:" . "<select name='celallomas' id='celallomas'>";
-                while ($row = mysqli_fetch_assoc($result)) {
-                    foreach ($row as $elem)
-                        echo "<option>" . $elem . "</option>";
-                }
-                echo "</select>";
-            ?>
-            <label for="route_id">Járatazonosító:</label>
-            <input type="text" name="route_id" id="route_id" required>
-            <br>
-            <label for="price">Ár:</label>
-            <input type="number" name="price" id="price" required>
-            <br>
-            <label for="jegyek_darabszama">jegyek_darabszama:</label>
-            <input type="number" name="jegyek_darabszama" id="jegyek_darabszama" required>
-            <br>
+        <form action="includes/add_ticket.inc.php" method="POST">
+            <h1>Jegy felvitele (admin), állomások listából (külön oldalon)</h1>
             <input type="submit" value="Jegy felvitele">
         </form>
 
     <?php
-
-    if($_GET['add_ticket'] === "success"){
+    $add_ticket = @$_GET['add_ticket'];
+    if($add_ticket === "success"){
         echo "Jegy sikeresen felvéve!";
-    } elseif ($_GET['add_ticket'] === "failure"){
+    } elseif ($add_ticket === "failure"){
         echo "Hiba a jegy felvitele során";
     }
-    echo "<br>";
+   /* echo "<br>";
     echo "POST: ";
     echo var_dump($_POST) . "<br>";
     echo "GET: ";
     echo var_dump($_GET) . "<br>";
     foreach ($_GET as $g){
-        echo $g . "<br>";
-    }
+        echo $g . "<br>";*/
     ?>
     </div>
 
@@ -142,14 +109,28 @@ include_once "includes/dbh.inc.php";
             <input type="submit" value="Jegy törlése">
         </form>
     </div>
-
+<?php
+    $add_ticket = @$_GET['add_ticket'];
+    if($add_ticket === "success"){
+    echo "Jegy sikeresen felvéve!";
+    } elseif ($add_ticket === "failure"){
+    echo "Hiba a jegy felvitele során";
+    }
+?>
     <div>
         <h1>Felhasználók listázása (admin által)</h1>
         <form action="includes/list_users.inc.php" method="post">
             <input type="submit" value="Felhasználók listázása">
         </form>
     </div>
-
+    <?php
+    $add_ticket = @$_GET['add_ticket'];
+    if($add_ticket === "success"){
+        echo "Jegy sikeresen felvéve!";
+    } elseif ($add_ticket === "failure"){
+        echo "Hiba a jegy felvitele során";
+    }
+    ?>
     <div>
         <h1>Felhasználó törlése (admin által)</h1>
         <form action="includes/delete_user.inc.php" method="post">
@@ -159,6 +140,13 @@ include_once "includes/dbh.inc.php";
             <input type="submit" value="Felhasználó törlése">
         </form>
     </div>
-
+    <?php
+    $add_ticket = @$_GET['add_ticket'];
+    if($add_ticket === "success"){
+        echo "Jegy sikeresen felvéve!";
+    } elseif ($add_ticket === "failure"){
+        echo "Hiba a jegy felvitele során";
+    }
+    ?>
 </body>
 </html>

@@ -2,9 +2,10 @@
 <?php
 include_once "dbh.inc.php";
 
-$sql = "SELECT helyazonosito, COUNT(*) AS eladott_jegyek
+$sql = "SELECT jarat.jaratazonosito, COUNT(*) AS eladott_jegyek
         FROM jegy
-        GROUP BY helyazonosito
+        JOIN jarat ON jegy.jaratazonosito = jarat.jaratazonosito
+        GROUP BY jarat.jaratazonosito
         ORDER BY eladott_jegyek DESC";
 
 $result = $conn->query($sql);
@@ -12,9 +13,9 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     echo "<h1>Legnépszerűbb járatok adatai</h1>";
     echo "<table  border='1'>";
-    echo "<tr><th>Járat azonosító</th><th>Eladott jegyek száma</th></tr>";
+    echo "<tr><th>Eladott jegyek száma</th><th>Járat azonosító</th></tr>";
     while ($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["jaratazonosito"] . "</td><td>" . $row["eladott_jegyek"] . "</td></tr>";
+        echo "<tr><td>" . $row["eladott_jegyek"] . "</td><td>" . $row["jaratazonosito"] . "</td></tr>";
     }
     echo "</table>";
 } else {

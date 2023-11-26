@@ -228,27 +228,28 @@ include_once "includes/dbh.inc.php";
 <!---->
 <!--    </div>-->
 
-    <div>
+<!--    <div>
         <?php
-        var_dump($_GET);
+/*        var_dump($_GET);
         $i = 0;
         foreach ($_GET as $str){
             ++$i;
             echo "$i." . $str . "<br>";
         }
-        ?>
-    </div>
-    <?php
-//    $sql = "SELECT * FROM felhasznalo;";
-//    $result = mysqli_query($conn, $sql);
-//    $resultCheck = mysqli_num_rows($result);
-//
-//    if ($resultCheck > 0) {
-//        while ($row = mysqli_fetch_assoc($result)) {
-//            echo $row['felhasznalonev'] . "<br>";
-//        }
-//    }
-//    var_dump($GLOBALS);
-    ?>
+
+
+
+    $sql = "SELECT * FROM felhasznalo;";
+    $result = mysqli_query($conn, $sql);
+    $resultCheck = mysqli_num_rows($result);
+
+    if ($resultCheck > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo $row['felhasznalonev'] . "<br>";
+        }
+    }
+    var_dump($GLOBALS);
+    */?>
+    </div>-->
     </body>
 </html>

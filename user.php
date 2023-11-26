@@ -17,7 +17,7 @@ include_once "includes/dbh.inc.php";
     <body>
     <h1 style="text-align: center; margin-top: 100px ">Jegyek darabszámának listázása járműtípus szerint</h1>
         <div class="routes">
-            <form action="includes/list_popular_routes.inc.php" method="POST">
+            <form>
                 <h2 id="routes">Vagy keressen a járatok között:</h2>
 
                 <!-- Szűrés közlekedési eszköz szerint -->

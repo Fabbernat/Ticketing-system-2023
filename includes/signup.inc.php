@@ -3,23 +3,23 @@
 <?php
 include_once "dbh.inc.php";
 try {
-    $felhasznalonev = mysqli_real_escape_string($conn, $_POST['felhasznalonev']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $jelszo = mysqli_real_escape_string($conn, $_POST['jelszo']);
-    $vezeteknev = mysqli_real_escape_string($conn, $_POST['vezeteknev']);
-    $keresztnev = mysqli_real_escape_string($conn, $_POST['keresztnev']);
-    $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
-    $szerep = mysqli_real_escape_string($conn, $_POST['radio']);
-    if(isset($_POST['radio'])) $szerep = 'admin';
-    else $szerep = 'user';
+    $felhasznalonev = @mysqli_real_escape_string($conn, $_POST['felhasznalonev']);
+    $email = @mysqli_real_escape_string($conn, $_POST['email']);
+    $jelszo = @mysqli_real_escape_string($conn, $_POST['jelszo']);
+    $vezeteknev = @mysqli_real_escape_string($conn, $_POST['vezeteknev']);
+    $keresztnev = @mysqli_real_escape_string($conn, $_POST['keresztnev']);
+    $confirm_password = @mysqli_real_escape_string($conn, $_POST['confirm_password']);
+    $szerep = @mysqli_real_escape_string($conn, $_POST['radio']);
+    $szerep = @$_POST['radio'];
 
     if ($jelszo !== $confirm_password) {
         $GLOBALS['signup'] = "passwords_do_not_match";
         header("Location: ../index.php?signup=passwords_do_not_match");
+        exit();
     }
     $jelszo = password_hash($jelszo, PASSWORD_DEFAULT);
 
-    if(mysqli_query($conn, "INSERT INTO felhasznalo(felhasznalonev, email, jelszo, vezeteknev, keresztnev, szerep)  VALUES ('$felhasznalonev', '$email', '$jelszo', '$vezeteknev', '$keresztnev', '$szerep');")){
+    if(mysqli_query($conn, "INSERT INTO felhasznalo(felhasznalonev, email, jelszo, vezeteknev, keresztnev, szerep, is_logged_in)  VALUES ('$felhasznalonev', '$email', '$jelszo', '$vezeteknev', '$keresztnev', '$szerep', false);")){
         $GLOBALS['signup'] = "success";
         header("Location: ../index.php?signup=success");
     } else {
@@ -42,5 +42,5 @@ try {
     }
 } catch (exception $exception){
     $GLOBALS['signup'] = $exception->getMessage();
-    header("Location: ../index.php?signup=failure&error=$exception");
+    header("Location: ../index.php?signup=exception");
 }
