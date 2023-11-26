@@ -1,17 +1,13 @@
+<a href="../user.php">Vissza a "Felhasználó műveletek" oldalra</a>
 <?php
-include_once "misc/navbar.php";
-include_once "misc/connect_to_database[[maybe_deprecated]].php";
-$databaseConnection = new ConnectToDatabase();
-
-// Use the getter method to retrieve data
-$conn = $databaseConnection->getConn();
+include_once "dbh.inc.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get the flight ID from the form or any source you prefer
     $flightId = $_POST["flight_id"]; // Adjust the field name as needed
 
     // Prepare and execute the SQL query to delete the flight
-    $sql = "DELETE FROM jaratazonosito WHERE jaratazonosito = ?";
+    $sql = "DELETE FROM jarat WHERE jaratazonosito = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $flightId);
 

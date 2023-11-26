@@ -1,15 +1,10 @@
+<a href="../user.php">Vissza a "Felhasználó műveletek" oldalra</a>
 <?php
-include_once "misc/navbar.php";
-include_once "misc/connect_to_database[[maybe_deprecated]].php";
-$databaseConnection = new ConnectToDatabase();
-
-// Use the getter method to retrieve data
-$conn = $databaseConnection->getConn();
+include_once "dbh.inc.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Assuming you have a way to identify the current user (e.g., from a session)
-    $current_user = "felhasznaloneved"; // Replace with the actual username
-
+    $current_user = $GLOBALS['current_user'];
     // Query to retrieve the user's own tickets
     $sql = "SELECT * FROM jegy WHERE felhasznalonev = ?";
     $stmt = $conn->prepare($sql);
@@ -33,3 +28,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->close();
     $conn->close();
 }
+//header("Location: ../user.php?view_tickets.inc=success");

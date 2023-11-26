@@ -1,5 +1,21 @@
 <?php
-session_start();
+session_start(); // Always start the session
+
+if(isset($_GET['signedin']) && $_GET['signedin'] === true){
+    // echo Felhasználó műveletek és Admin műveletek if signed in
+    echo '<span style="color:blue;font-weight:bold; padding:5px;">';
+    echo '<a href="user.php">Felhasználó műveletek</a>';
+    echo '</span>';
+
+    if ($admin) {
+        echo '<span style="color:blue;font-weight:bold; padding:5px;">';
+        echo '<a href="admin.php">Admin műveletek</a>';
+        echo '</span>';
+    }
+} else {
+    // Destroy the session if not signed in
+    session_destroy();
+}
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 echo "<div id='navbar'><div id='fixed'>";
@@ -34,10 +50,22 @@ include_once "includes/dbh.inc.php";
     ?>
     <div class="muveletek">
     <div class="logout">
-        <form action="includes/logout.php" method="POST">
+        <form action="includes/logout.inc.php" method="POST">
             <button type="submit">Kijelentkezés</button>
         </form>
     </div>
+        <?php
+        if (isset($_GET['logout'])) {
+            // Check the value of the 'logout' parameter
+            $logoutStatus = $_GET['logout'];
+            if ($logoutStatus === 'success') {
+                echo '<p class="logout-success">Sikeres kijelentkezés!</p>';
+            } elseif ($_GET['logout'] === "failure") {
+                echo '<p class="error-message">Nem sikerült a kijelentkezés. Jelenleg még ez a funkció nem működik</p>';
+            }
+        }
+        ?>
+
     <div class="register">
         <form action="includes/signup.inc.php" method="POST">
             <h2 id="signup">Regisztráció</h2>
@@ -77,7 +105,7 @@ include_once "includes/dbh.inc.php";
         <?php
 //        var_dump($GLOBALS);
         if ($_GET['signup'] === "success"){
-            echo "Sikeres regisztráció!";
+            echo "Sikeres regisztráció! Most már bejelentkezhet.";
         } elseif ($_GET['signup'] === "passwords_do_not_match") {
             echo "Hiba történt a regisztráció során. A két jelszó nem egyezik meg!";
         } elseif (($_GET['signup'] === "failure")) {
@@ -87,7 +115,7 @@ include_once "includes/dbh.inc.php";
     </div>
 
     <div class="login">
-        <form action="includes/login.inc.php" method="POST">
+        <form action="includes/login.inc.php?signedin=true" method="POST">
             <h2 id="login">Bejelentkezés</h2>
             <!-- Input fields for username and password -->
             <label for="felhasznalonev">Felhasználónév:</label>
@@ -113,104 +141,89 @@ include_once "includes/dbh.inc.php";
     ?>
     </div>
 
-
-    <div class="routes">
+    <div>
         <form action="includes/jaratok.inc.php" method="POST">
-            <h2 id="routes">Vagy keressen a járatok között:</h2>
-
-            <!-- Szűrés közlekedési eszköz szerint -->
-            <h3>Szűrés közlekedési eszköz szerint:</h3>
-            <br>
-            <input type="checkbox" id="busz" name="kozlekedes" value="busz">
-            <label for="busz">Busz</label>
-            <input type="checkbox" id="vonat" name="kozlekedes" value="vonat">
-            <label for="vonat">Vonat</label>
-            <input type="checkbox" id="repulo" name="kozlekedes" value="repulo">
-            <label for="repulo">Repülő</label>
-            <button onclick="function szuresKozlekedesSzerint() {
-
-            }
-            szuresKozlekedesSzerint()">Szűrés</button>
-
-            <!-- Kikapcsolás gomb -->
-            <button onclick="torles()">Törlés</button>
-            <br>
-            <label for="induloallomas">Induló állomás:</label>
-            <input type="text" id="induloallomas" placeholder="Induló állomás">
-            <br>
-            <label for="celallomas">Célállomás:</label>
-            <input type="text" id="celallomas" placeholder="Célállomás">
-            <br>
-            <button type="submit">Keresés állomások és járatok között</button>
+            <button type="submit">Járatok Megtekintése</button>
         </form>
-        <div id = "torles">
-
-
-            <script>
-                function torles() {
-                    // Kikapcsolás, visszaállítás a szűrés nélküli állapotra
-                    document.getElementById("induloallomas").value = "";
-                    document.getElementById("celallomas").value = "";
-                    const checkboxes = document.querySelectorAll('input[name="kozlekedes"]');
-                    checkboxes.forEach(checkbox => {
-                        checkbox.checked = false;
-                    });
-            </script>
-        </div>
     </div>
-    <div id="jaratok">
 
-        <!-- Szűrés állomások szerint -->
-        <h2>Szűrés állomások szerint:</h2>
-        <label for="indulo_allomas">Induló állomás:</label>
-        <input type="text" id="indulo_allomas">
-        <label for="cel_allomas">Cél állomás:</label>
-        <input type="text" id="cel_allomas">
-        <button onclick="szuresAllomasSzerint()">Szűrés</button>
 
-        <!-- Szűrés közlekedési eszköz szerint -->
-        <h2>Szűrés közlekedési eszköz szerint:</h2>
-        <input type="checkbox" id="busz" name="kozlekedes" value="busz">
-        <label for="busz">Busz</label>
-        <input type="checkbox" id="vonat" name="kozlekedes" value="vonat">
-        <label for="vonat">Vonat</label>
-        <input type="checkbox" id="repulo" name="kozlekedes" value="repulo">
-        <label for="repulo">Repülő</label>
-        <button onclick="szuresKozlekedesSzerint()">Szűrés</button>
-
-        <!-- Kikapcsolás gomb -->
-        <button onclick="torles()">Törlés</button>
-
-        <script>
-            function szuresAllomasSzerint() {
-                // Szűrés megvalósítása állomások szerint
-                var induloAllomas = document.getElementById("indulo_allomas").value;
-                var celAllomas = document.getElementById("cel_allomas").value;
-
-                // Itt hozzáfűz szűrés logikáját
-                // Például: elküld az állomásokat a szerverre és lekér a szűrt járatokat
-
-                // Eredmények megjelenítése - példa
-                var eredmenyekDiv = document.getElementById("eredmenyek");
-                eredmenyekDiv.innerHTML = "Szűrt járatok: " + induloAllomas + " -> " + celAllomas;
-            }
-
-            function torles() {
-                // Kikapcsolás, visszaállítás a szűrés nélküli állapotra
-                document.getElementById("indulo_allomas").value = "";
-                document.getElementById("cel_allomas").value = "";
-                const checkboxes = document.querySelectorAll('input[name="kozlekedes"]');
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = false;
-                });
-            }
-        </script>
-
-        <!-- Keresési eredmények megjelenítése -->
-        <div id="eredmenyek">
-            <!-- Itt jelennek meg a szűrt járatok -->
-        </div>
-    </div>
+<!--    <div class="routes">-->
+<!--        <h1 id="routes">Vagy keressen a járatok között:</h1>-->
+<!---->
+       <!-- Szűrés közlekedési eszköz szerint -->
+<!--        <h3>Szűrés közlekedési eszköz szerint:</h3>-->
+<!--        <input type="checkbox" id="busz" name="kozlekedes" value="busz">-->
+<!--        <label for="busz">Busz</label>-->
+<!--        <input type="checkbox" id="vonat" name="kozlekedes" value="vonat">-->
+<!--        <label for="vonat">Vonat</label>-->
+<!--        <input type="checkbox" id="repulo" name="kozlekedes" value="repulo">-->
+<!--        <label for="repulo">Repülő</label>-->
+<!--        <button onclick="szuresKozlekedesSzerint()">Szűrés</button>-->
+<!--        <script>-->
+<!--            function torles() {-->
+<!--                // Kikapcsolás, visszaállítás a szűrés nélküli állapotra-->
+<!--                document.getElementById("induloallomas").value = "";-->
+<!--                document.getElementById("celallomas").value = "";-->
+<!--                const checkboxes = document.querySelectorAll('input[name="kozlekedes"]');-->
+<!--                checkboxes.forEach(checkbox => {-->
+<!--                    checkbox.checked = false;-->
+<!--                });-->
+<!--        </script>-->
+<!---->
+<!--        <script>-->
+<!--            function szuresAllomasSzerint() {-->
+<!--                // Szűrés megvalósítása állomások szerint-->
+<!--                var induloAllomas = document.getElementById("indulo_allomas").value;-->
+<!--                var celAllomas = document.getElementById("cel_allomas").value;-->
+<!---->
+<!--                // Itt hozzáfűz szűrés logikáját-->
+<!--                // Például: elküld az állomásokat a szerverre és lekér a szűrt járatokat-->
+<!---->
+<!--                // Eredmények megjelenítése - példa-->
+<!--                var eredmenyekDiv = document.getElementById("eredmenyek");-->
+<!--                eredmenyekDiv.innerHTML = "Szűrt járatok: " + induloAllomas + " -> " + celAllomas;-->
+<!--            }-->
+<!---->
+<!--            function torles() {-->
+<!--                // Kikapcsolás, visszaállítás a szűrés nélküli állapotra-->
+<!--                document.getElementById("indulo_allomas").value = "";-->
+<!--                document.getElementById("cel_allomas").value = "";-->
+<!--                const checkboxes = document.querySelectorAll('input[name="kozlekedes"]');-->
+<!--                checkboxes.forEach(checkbox => {-->
+<!--                    checkbox.checked = false;-->
+<!--                });-->
+<!--            }-->
+<!--        </script>-->
+<!--        <button onclick="torles()">Törlés</button>-->
+<!---->
+<!--        <form action="includes/jaratok.inc.php" method="POST">-->
+<!--            <br>-->
+          <!-- Kikapcsolás gomb -->
+<!--            <button type="button" onclick="torles()">Törlés</button>-->
+<!--            <br>-->
+<!--            <label for="induloallomas">Induló állomás:</label>-->
+<!--            <input type="text" id="induloallomas" placeholder="Induló állomás">-->
+<!--            <br>-->
+<!--            <label for="celallomas">Célállomás:</label>-->
+<!--            <input type="text" id="celallomas" placeholder="Célállomás">-->
+<!--            <br>-->
+<!--            <button type="submit">Keresés állomások és járatok között</button>-->
+<!--        </form>-->
+<!--        </div>-->
+<!---->
+<!--    <div id="jaratok">-->
+     <!-- Szűrés állomások szerint -->
+<!--        <h3>Szűrés állomások szerint:</h3>-->
+<!--        <label for="indulo_allomas">Induló állomás:</label>-->
+<!--        <input type="text" id="indulo_allomas">-->
+<!--        <label for="cel_allomas">Cél állomás:</label>-->
+<!--        <input type="text" id="cel_allomas">-->
+<!---->
+<!---->
+   <!-- Kikapcsolás gomb -->
+<!---->
+<!--    </div>-->
 
     <div>
         <?php
@@ -223,16 +236,16 @@ include_once "includes/dbh.inc.php";
         ?>
     </div>
     <?php
-    $sql = "SELECT * FROM felhasznalo;";
-    $result = mysqli_query($conn, $sql);
-    $resultCheck = mysqli_num_rows($result);
-
-    if ($resultCheck > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo $row['felhasznalonev'] . "<br>";
-        }
-    }
-    var_dump($GLOBALS);
+//    $sql = "SELECT * FROM felhasznalo;";
+//    $result = mysqli_query($conn, $sql);
+//    $resultCheck = mysqli_num_rows($result);
+//
+//    if ($resultCheck > 0) {
+//        while ($row = mysqli_fetch_assoc($result)) {
+//            echo $row['felhasznalonev'] . "<br>";
+//        }
+//    }
+//    var_dump($GLOBALS);
     ?>
     </body>
 </html>

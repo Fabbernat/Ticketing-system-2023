@@ -1,4 +1,5 @@
 <?php
+
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
@@ -20,8 +21,7 @@ function menu() {
 }
 
 echo menu();
-
-if(session_status() === PHP_SESSION_ACTIVE) {
+if(/*$GLOBALS['signedin'] === true || */$_GET['login'] === "success" || session_status() === PHP_SESSION_ACTIVE) {
     echo '<span style="color:blue;font-weight:bold; padding:5px;">';
     echo '<a href="user.php">Felhasználó műveletek</a>';
     echo '</span>';

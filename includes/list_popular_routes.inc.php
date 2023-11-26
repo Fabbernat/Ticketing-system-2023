@@ -1,12 +1,7 @@
+<a href="../user.php">Vissza a "Felhasználó műveletek" oldalra</a>
 <?php
-include_once "misc/navbar.php";
-include_once "misc/connect_to_database[[maybe_deprecated]].php";
-$databaseConnection = new ConnectToDatabase();
+include_once "dbh.inc.php";
 
-// Use the getter method to retrieve data
-$conn = $databaseConnection->getConn();
-
-// Query to get the most popular flights based on helyazonosito
 $sql = "SELECT helyazonosito, COUNT(*) AS eladott_jegyek
         FROM jegy
         GROUP BY helyazonosito

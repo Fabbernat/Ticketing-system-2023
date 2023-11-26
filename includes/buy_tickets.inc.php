@@ -1,23 +1,21 @@
+<a href="../user.php">Vissza a "Felhasználó műveletek" oldalra</a>
 <?php
-include_once "misc/navbar.php";
-include_once "misc/connect_to_database[[maybe_deprecated]].php";
-$databaseConnection = new ConnectToDatabase();
-
-// Use the getter method to retrieve data
-$conn = $databaseConnection->getConn();
+include_once "dbh.inc.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Assuming you have a way to identify the current user (e.g., from a session)
-    $current_user = "felhasznaloneved"; // Replace with the actual username
 
     // Retrieve form data
-    $ticket_type = $_POST["ticket_type"];
+    $induloallomas = $_POST["induloallomas"];
+    $celallomas = $_POST["celallomas"];
+    $jaratazonosito = $_POST["jaratazonosito"];
+    $current_user = $GLOBALS['current_user'];
     $num_tickets = $_POST["num_tickets"];
 
     // Insert purchased tickets into the database
-    $sql = "INSERT INTO jegy (jaratazonosito, felhasznalonev, darab) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO jegy (induloallomas, celallomas, jaratazonosito, felhasznalonev, jegyek_darabszama) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssi", $ticket_type, $current_user, $num_tickets);
+    $stmt->bind_param("ssisi", $induloallomas, $celallomas, $jaratazonosito, $current_user, $num_tickets);
 
     if ($stmt->execute()) {
         echo "Sikeres jegyvásárlás!";
@@ -39,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
 <h1>Jegyvásárlás</h1>
-<form action="buy_tickets.php" method="post">
+<form action="buy_tickets.inc.php" method="post">
     <label for="ticket_type">Járat azonosító:</label>
     <input type="text" name="ticket_type" id="ticket_type" required>
     <br>

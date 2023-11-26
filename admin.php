@@ -63,6 +63,14 @@ include_once "includes/dbh.inc.php";
         </form>
     </div>
 
+    <?php
+    if ($_GET['add_station'] === "success"){
+        echo "Állomás sikeresen felvéve!<br>";
+    } elseif ($_GET['add_station'] === "failure"){
+        echo "Valami hiba történt!<br>";
+    }
+    ?>
+
     <div>
         <form action="includes/add_ticket.php" method="POST">
             <h1>Jegy felvitele (admin), állomások listából</h1>
@@ -125,7 +133,7 @@ include_once "includes/dbh.inc.php";
     </div>
 
     <div>
-    <h1>Felhasználó jegyének törlése (admin által)</h1>
+        <h1 style="text-align: center; margin-top: 100px ">Felhasználó jegyének törlése (admin által)</h1>
         <form action="includes/delete_user_ticket.php" method="post">
             <label for="route_id">Járatazonosító:</label>
             <input type="number" name="route_id" id="route_id" required>

@@ -15,7 +15,7 @@ include_once "includes/dbh.inc.php";
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <h1>Jegyek darabszámának listázása járműtípus szerint</h1>
+    <h1 style="text-align: center; margin-top: 100px ">Jegyek darabszámának listázása járműtípus szerint</h1>
         <div class="routes">
             <form action="admin.php" method="POST">
                 <h2 id="routes">Vagy keressen a járatok között:</h2>
@@ -74,5 +74,43 @@ include_once "includes/dbh.inc.php";
                 ?>
             </form>
         </div>
+
+        <div>
+            <form action="includes/view_tickets.inc.php" method="POST">
+                <button type="submit">Felhasználó saját jegyeinek megtekintése</button>
+                <?php
+                echo $_GET['result'];
+                ?>
+            </form>
+        </div>
+
+        <div>
+            <form action="includes/buy_tickets.inc.php" method="POST">
+                <button type="submit">Jegyvásárlás</button>
+                <?php
+                echo $_GET['result'];
+                ?>
+            </form>
+        </div>
+
+        <div>
+            <form action="includes/list_popular_routes.inc.php" method="POST">
+                <button type="submit">Legnépszerűbb járatok adatainak felsorolása (elkelt jegyek alapján)</button>
+                <?php
+                echo $_GET['result'];
+                ?>
+            </form>
+        </div>
+
+        <div>
+            <form action="includes/delete_route.inc.php" method="POST">
+                <button type="submit">Járat törlése</button>
+                <?php
+                echo $_GET['result'];
+                ?>
+            </form>
+        </div>
     </body>
+
+
 </html>

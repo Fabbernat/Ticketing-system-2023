@@ -24,4 +24,4 @@ if ($result->num_rows > 0) {
 
 // Close the database connection
 $conn->close();
-header("Location: ../user.php?list_tickets_by_station.inc=success");
+//header("Location: ../user.php?list_tickets_by_station.inc=success");

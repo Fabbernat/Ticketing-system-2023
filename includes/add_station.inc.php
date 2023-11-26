@@ -22,6 +22,6 @@ try {
 
     $conn->close();
 } catch (exception){
-    header("Location: ../admin.php?add_route=failure");
+    header("Location: ../admin.php?add_station=failure");
 
 }

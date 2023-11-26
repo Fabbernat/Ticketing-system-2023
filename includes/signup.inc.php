@@ -1,3 +1,5 @@
+<a href="../index.php">Vissza a főoldalra</a>
+
 <?php
 include_once "dbh.inc.php";
 try {
@@ -18,17 +20,19 @@ try {
     $jelszo = password_hash($jelszo, PASSWORD_DEFAULT);
 
     if(mysqli_query($conn, "INSERT INTO felhasznalo(felhasznalonev, email, jelszo, vezeteknev, keresztnev, szerep)  VALUES ('$felhasznalonev', '$email', '$jelszo', '$vezeteknev', '$keresztnev', '$szerep');")){
-        session_start();
         $GLOBALS['signup'] = "success";
         header("Location: ../index.php?signup=success");
     } else {
 
         // elokeszitjuk az utasitast
         $stmt = mysqli_prepare($conn, "INSERT INTO felhasznalo(felhasznalonev, email, jelszo, vezeteknev, keresztnev, szerep) VALUES (?, ?, ?, ?, ?, ?);");
-        mysqli_stmt_bind_param($stmt, "ssssss", $felhasznalonev, $email, $jelszo, $vezeteknev, $keresztnev, $szerep);
+
         // bekotjuk a parametereket (igy biztonsagosabb az adatkezeles)
-        if ($stmt->execute()) {
-            session_start();
+        mysqli_stmt_bind_param($stmt, "ssssss", $felhasznalonev, $email, $jelszo, $vezeteknev, $keresztnev, $szerep);
+        if(mysqli_stmt_execute($stmt)) {
+            $GLOBALS['signup'] = "success";
+            header("Location: ../index.php?signup=success");
+        } elseif ($stmt->execute()) {
             $GLOBALS['signup'] = "success";
             header("Location: ../index.php?signup=success");
         }  else {
@@ -36,7 +40,7 @@ try {
             header("Location: ../index.php?signup=failure");
         }
     }
-} catch (exception){
-    $GLOBALS['signup'] = "failure";
-    header("Location: ../index.php?signup=failure");
+} catch (exception $exception){
+    $GLOBALS['signup'] = $exception->getMessage();
+    header("Location: ../index.php?signup=failure&error=$exception");
 }
