@@ -1,3 +1,5 @@
+<a href="../admin.php">Vissza az "Admin műveletek" oldalra</a>
+<a href="../user.php">Vissza a "Felhasználó műveletek" oldalra</a>
 <?php
 include_once "dbh.inc.php";
 

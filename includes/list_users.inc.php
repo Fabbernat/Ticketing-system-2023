@@ -5,6 +5,8 @@
     <title>Felhasználók listázása</title>
 </head>
 <body>
+<a href="../admin.php">Vissza az "Admin műveletek" oldalra</a>
+<a href="../user.php">Vissza a "Felhasználó műveletek" oldalra</a>
 <a href="../index.php">Vissza a főoldalra</a> <table border='1'>
     <?php include_once "dbh.inc.php";
 

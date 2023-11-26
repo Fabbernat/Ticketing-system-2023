@@ -102,14 +102,7 @@ include_once "includes/dbh.inc.php";
             </form>
         </div>
 
-        <div>
-            <form action="includes/delete_route.inc.php" method="POST">
-                <button type="submit">Járat törlése</button>
-                <?php
-                echo @$_GET['result'];
-                ?>
-            </form>
-        </div>
+
     </body>
 
 

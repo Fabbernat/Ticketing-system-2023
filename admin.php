@@ -98,7 +98,7 @@ include_once "includes/dbh.inc.php";
 
     <div>
         <h1 style="text-align: center; margin-top: 100px ">Felhasználó jegyének törlése (admin által)</h1>
-        <form action="includes/delete_user_ticket.php" method="post">
+        <form action="includes/delete_user_ticket.inc.php" method="post">
             <label for="route_id">Járatazonosító:</label>
             <input type="number" name="route_id" id="route_id" required>
             <br>
@@ -148,5 +148,38 @@ include_once "includes/dbh.inc.php";
         echo "Hiba a jegy felvitele során";
     }
     ?>
+
+    <div>
+        <form action="includes/delete_route.inc.php" method="POST">
+            <?php
+            $sql = "SELECT nev, varos FROM allomas;";
+            $result = mysqli_query($conn, $sql);
+            $resultCheck = mysqli_num_rows($result);
+
+            if ($resultCheck > 0) {
+                echo "Indulóállomás:" . "<select name='route_id' id='induloallomas'>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                    foreach ($row as $elem)
+                        echo "<option>" . $elem . "</option>";
+                }
+            }
+            echo "</select>";
+
+            $sql = "SELECT nev, varos FROM allomas;"; // warningozza, de NEM SZABAD KITÖRÖLNI!
+            $result = mysqli_query($conn, $sql);
+
+            echo "Célállomás:" . "<select name='route_id' id='celallomas'>";
+            while ($row = mysqli_fetch_assoc($result)) {
+                foreach ($row as $elem)
+                    echo "<option>" . $elem . "</option>";
+            }
+            echo "</select>";
+            ?>
+            <button type="submit">Járat törlése</button>
+            <?php
+            echo @$_GET['result'];
+            ?>
+        </form>
+    </div>
 </body>
 </html>
