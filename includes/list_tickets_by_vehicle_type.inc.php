@@ -9,7 +9,7 @@ function list_tickets_by_vehicle_type($result)
 {
     if ($result->num_rows > 0) {
         $string = "<h1>Jegyek darabszamanak listazasa jarmutipus szerint</h1>";
-        $string .= "<table>";
+        $string .= "<table border='1'>";
         $string .= "<tr><th>Jarmutipus</th><th>Darabszam</th></tr>";
         while ($row = $result->fetch_assoc()) {
             $string .= "<tr><td>" . $row["tipus"] . "</td><td>" . $row["ticket_count"] . "</td></tr>";

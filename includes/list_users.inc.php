@@ -5,7 +5,7 @@
     <title>Felhasználók listázása</title>
 </head>
 <body>
-<a href="../index.php">Vissza a főoldalra</a> <table>
+<a href="../index.php">Vissza a főoldalra</a> <table border='1'>
     <?php include_once "dbh.inc.php";
 
     $sql = "SELECT felhasznalonev, email, vezeteknev, keresztnev, szerep FROM felhasznalo;"; $result = mysqli_query($conn, $sql); $resultCheck = mysqli_num_rows($result);

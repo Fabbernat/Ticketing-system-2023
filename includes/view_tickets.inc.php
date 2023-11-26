@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($result->num_rows > 0) {
         echo "<h1>Felhasználó saját jegyeinek listája</h1>";
-        echo "<table>";
+        echo "<table border='1'>";
         echo "<tr><th>Jegyazonosító</th><th>Járat azonosító</th><th>Felhasználónév</th></tr>";
         while ($row = $result->fetch_assoc()) {
             echo "<tr><td>" . $row["jegyazonosito"] . "</td><td>" . $row["jaratazonosito"] . "</td><td>" . $row["felhasznalonev"] . "</td></tr>";

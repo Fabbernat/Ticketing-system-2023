@@ -11,7 +11,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<h1>Legnépszerűbb járatok adatai</h1>";
-    echo "<table>";
+    echo "<table  border='1'>";
     echo "<tr><th>Járat azonosító</th><th>Eladott jegyek száma</th></tr>";
     while ($row = $result->fetch_assoc()) {
         echo "<tr><td>" . $row["jaratazonosito"] . "</td><td>" . $row["eladott_jegyek"] . "</td></tr>";

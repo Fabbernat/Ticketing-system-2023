@@ -33,7 +33,7 @@ include_once "includes/dbh.inc.php";
             <input type="text" name="destination" id="destination" required>
             <br>
             <label for="date">Első indulás dátuma:</label>
-            <input type="date" name="date" id="date">
+            <input type="date" name="date" id="date" required>
             <br>
             <br>
             <input type="submit" value="Járat felvitele">
@@ -89,7 +89,7 @@ include_once "includes/dbh.inc.php";
             }
             echo "</select>";
 
-            $sql = "SELECT nev, varos FROM allomas;";
+            $sql = "SELECT nev, varos FROM allomas;"; // warningozza, de NEM SZABAD KITÖRÖLNI!
             $result = mysqli_query($conn, $sql);
 
                 echo "Célállomás:" . "<select name='celallomas' id='celallomas'>";
@@ -104,9 +104,6 @@ include_once "includes/dbh.inc.php";
             <br>
             <label for="price">Ár:</label>
             <input type="number" name="price" id="price" required>
-            <br>
-            <label for="elerhetodarab">Elérhető darab:</label>
-            <input type="number" name="elerhetodarab" id="elerhetodarab" required>
             <br>
             <label for="jegyek_darabszama">jegyek_darabszama:</label>
             <input type="number" name="jegyek_darabszama" id="jegyek_darabszama" required>

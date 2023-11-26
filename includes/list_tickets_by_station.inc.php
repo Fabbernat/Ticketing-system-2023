@@ -12,7 +12,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<h1>Jegyek darabszámának listázása állomások szerint, állomás-információval</h1>";
-    echo "<table>";
+    echo "<table border='1'>";
     echo "<tr><th>Jegyazonosító</th><th>Felhasználónév</th><th>Járat azonosító</th><th>Induló állomás</th><th>Cél állomás</th><th>Darabszám</th></tr>";
     while ($row = $result->fetch_assoc()) {
         echo "<tr><td>" . $row["jaratazonosito"] . "</td><td>" . $row["induloallomas"] . "</td><td>" . $row["celallomas"] . "</td><td>" . $row["helyazonosito"] . "</td><td>" . $row["ar"] . "</td><td>" . $row["elerhetodarab"] . "</td><td>" . $row["jegyek_darabszama"] . "</td></tr>";
