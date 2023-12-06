@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -24,11 +23,9 @@
         echo "Indulóállomás:" . "<select name='induloallomas' id='induloallomas'>";
         $count = 0;
         while ($row = mysqli_fetch_assoc($result)) {
-            foreach ($row as $elem) {
-                $selected = ($count < 1) ? "selected" : "";
-                echo "<option $selected>" . $elem . "</option>";
-                $count++;
-            }
+            $selected = ($count === 0) ? "selected" : "";
+            echo "<option $selected>" . $row['nev'] . "</option>";
+            $count++;
         }
     }
     echo "</select>";
@@ -41,8 +38,8 @@
 
     while ($row = mysqli_fetch_assoc($result)) {
         foreach ($row as $elem) {
-            $selected = ($count < 3) ? "selected" : "";
-            echo "<option $selected>" . $elem . "</option>";
+            $selected = ($count === 2) ? "selected" : ""; // A második elem lesz kiválasztva
+            echo "<option $selected>" . $row['nev'] . "</option>";
             $count++;
         }
     }
