@@ -11,13 +11,13 @@ include_once "includes/dbh.inc.php";
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Jegyek darabszámának listázása járműtípus szerint</title>
+        <title>Felhasználói műveletek</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
     <h1 style="text-align: center; margin-top: 100px ">Jegyek darabszámának listázása járműtípus szerint</h1>
         <div class="routes">
-            <form>
+            <form action="user.php" method="post">
                 <h2 id="routes">Vagy keressen a járatok között:</h2>
 
                 <!-- Szűrés közlekedési eszköz szerint -->
@@ -35,6 +35,9 @@ include_once "includes/dbh.inc.php";
                 <button onclick=torles()>Törlés</button>
 
                 <script>
+                function szuresKozlekedesSzerint() {
+                    document.forms[0].submit();
+                }
                 function torles() {
                 // Kikapcsolás, visszaállítás a szűrés nélküli állapotra
                 document.getElementById("indulo_allomas").value = "";

@@ -10,7 +10,7 @@ try {
     $keresztnev = @mysqli_real_escape_string($conn, $_POST['keresztnev']);
     $confirm_password = @mysqli_real_escape_string($conn, $_POST['confirm_password']);
     $szerep = @mysqli_real_escape_string($conn, $_POST['radio']);
-    $szerep = @$_POST['radio'];
+//    $szerep = @$_POST['radio']; // Ez redundáns
 
     if ($jelszo !== $confirm_password) {
         $GLOBALS['signup'] = "passwords_do_not_match";

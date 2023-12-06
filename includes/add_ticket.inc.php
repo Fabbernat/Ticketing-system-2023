@@ -22,9 +22,13 @@
 
     if ($resultCheck > 0) {
         echo "Indulóállomás:" . "<select name='induloallomas' id='induloallomas'>";
+        $count = 0;
         while ($row = mysqli_fetch_assoc($result)) {
-            foreach ($row as $elem)
-                echo "<option>" . $elem . "</option>";
+            foreach ($row as $elem) {
+                $selected = ($count < 1) ? "selected" : "";
+                echo "<option $selected>" . $elem . "</option>";
+                $count++;
+            }
         }
     }
     echo "</select>";
@@ -33,9 +37,14 @@
     $result = mysqli_query($conn, $sql);
 
     echo "Célállomás:" . "<select name='celallomas' id='celallomas'>";
+    $count = 0;
+
     while ($row = mysqli_fetch_assoc($result)) {
-        foreach ($row as $elem)
-            echo "<option>" . $elem . "</option>";
+        foreach ($row as $elem) {
+            $selected = ($count < 3) ? "selected" : "";
+            echo "<option $selected>" . $elem . "</option>";
+            $count++;
+        }
     }
     echo "</select>";
     ?>

@@ -1,5 +1,5 @@
 <?php
-session_start(); // Always start the session
+session_start(); // Minden felh. oldal 1. utasítása kell h legyen
 
 if(isset($_GET['signedin']) && $_GET['signedin'] === true){
     // echo Felhasználó műveletek és Admin műveletek if signed in

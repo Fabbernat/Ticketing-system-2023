@@ -34,4 +34,4 @@ if(/*$GLOBALS['signedin'] === true || */$value === "success" || session_status()
 }
 echo '</div>';
 
-?>
+

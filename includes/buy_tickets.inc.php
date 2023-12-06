@@ -7,6 +7,22 @@
 <body>
 <a href="../user.php">Vissza a "Felhasználó műveletek" oldalra</a>
 <h1>Jegyvásárlás</h1>
+<main>
+    <h1>Tartózkodási helyem kiválasztása:</h1>
+    <form action="select_station.inc.php" method="post">
+        <label for="felhasznalonev">felhasznalonev
+            <input type="text" name="felhasznalonev" id="felhasznalonev">
+        </label>
+        <br>
+        <label for="allomasazonosito">allomasazonosito
+            <input type="number" name="allomasazonosito" id="allomasazonosito">
+        </label>
+        <br>
+        <label for="varos">varos
+            <input type="text" name="varos" id="varos">
+        </label>
+    </form>
+</main>
 <h2>Járatok, amelyekre jegyet vehet:</h2>
 <?php
 include_once "dbh.inc.php";
@@ -29,7 +45,7 @@ if ($result) {
 }
 
 ?>
-<form action="buy_tickets.inc2.php" method="post">
+<form action="buy_tickets_form_action.inc.php" method="post">
     <label for="jaratazonosito">Járat azonosító:</label>
     <input type="text" name="jaratazonosito" id="jaratazonosito" required>
     <br>
