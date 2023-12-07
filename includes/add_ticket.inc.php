@@ -11,7 +11,7 @@
 
 <h1>Jegy felvitele (admin)</h1>
 
-<form action="add_ticket.inc2.php" method="post">
+<form action="add_ticket_form_action.inc.php" method="post">
     <h2>Állomások, ezekből választhat induló- és célállomást:</h2>
     <?php
     include_once "dbh.inc.php";
