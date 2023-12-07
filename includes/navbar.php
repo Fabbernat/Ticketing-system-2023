@@ -1,4 +1,5 @@
 <?php
+include_once "dbh.inc.php";
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
@@ -21,7 +22,10 @@ function menu() {
 
 echo menu();
 $value = @$_GET['login'];
-if(/*$GLOBALS['signedin'] === true || */$value === "success" || session_status() === PHP_SESSION_ACTIVE) {
+$felhasznalonev = @$_GET['felhasznalonev'];
+$mysqli = mysqli_query($conn, "SELECT is_logged_in FROM felhasznalo WHERE felhasznalonev = '$felhasznalonev'");
+
+if(/*$GLOBALS['signedin'] === true || */$felhasznalonev == mysqli_fetch_assoc($mysqli) || $value === "success" || session_status() === PHP_SESSION_ACTIVE) {
     echo '<span style="color:blue;font-weight:bold; padding:5px;">';
     echo '<a href="user.php">Felhasználó műveletek</a>';
     echo '</span>';
