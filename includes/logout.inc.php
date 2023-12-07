@@ -6,7 +6,7 @@ session_start();
 if (isset($_SESSION['username'])) {
     $felhasznalonev = $_SESSION['username'];
 
-    $stmt = mysqli_prepare($conn, "UPDATE felhasznalo SET is_logged_in = false WHERE felhasznalonev = ?");
+    $stmt = mysqli_prepare($conn, "UPDATE felhasznalo SET is_logged_in = 0 WHERE felhasznalonev = ?");
     mysqli_stmt_bind_param($stmt, "s", $felhasznalonev);
 
     if (mysqli_stmt_execute($stmt)) {
