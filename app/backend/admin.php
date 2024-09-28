@@ -12,7 +12,7 @@ include_once "includes/dbh.inc.php";
 <head>
     <meta charset="UTF-8">
     <title>Adminisztrátori müveletek</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../frontend/css/style.css">
 </head>
 <body>
 

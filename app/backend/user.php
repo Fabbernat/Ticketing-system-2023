@@ -12,7 +12,7 @@ include_once "includes/dbh.inc.php";
     <head>
         <meta charset="UTF-8">
         <title>Felhasználói műveletek</title>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../frontend/css/style.css">
     </head>
     <body>
     <h1 style="text-align: center; margin-top: 100px ">Jegyek darabszámának listázása járműtípus szerint</h1>

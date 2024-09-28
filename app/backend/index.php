@@ -29,11 +29,11 @@ include_once "includes/dbh.inc.php";
     <head>
         <meta charset="UTF-8">
         <title>Fabian Transport</title>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../frontend/css/style.css">
     </head>
     <body>
     <h1 style="text-align: center; margin-top: 100px ">Fabian Transport Közlekedési Társaság</h1>
-    <img src="img/transport.jfif" alt="Fabian Transport Közlekedési Társaság borítóképe"
+    <img src="../frontend/img/transport.jfif" alt="Fabian Transport Közlekedési Társaság borítóképe"
          title="Fabian Transport Közlekedési Társaság borítóképe">
     <hr>
     <aside>

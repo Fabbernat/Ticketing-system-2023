@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Jegy felvitele (admin)</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../frontend/css/style.css">
 </head>
 <body>
 <a href="../admin.php">Vissza az "Admin műveletek" oldalra</a>
