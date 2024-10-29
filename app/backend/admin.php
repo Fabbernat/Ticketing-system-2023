@@ -10,7 +10,7 @@ include_once "includes/dbh.inc.php";
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Adminisztrátori müveletek</title>
     <link rel="stylesheet" href="../frontend/css/style.css">
 </head>

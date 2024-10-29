@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Jegyvásárlás</title>
 </head>
 <body>

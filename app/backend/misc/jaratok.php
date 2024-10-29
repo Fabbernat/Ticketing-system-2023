@@ -10,7 +10,7 @@ $conn = $databaseConnection->getConn();*/
 <!DOCTYPE html>
 <html lang="hu">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <title>Fabian Transport - Járatok</title>
     </head>
     <body>
